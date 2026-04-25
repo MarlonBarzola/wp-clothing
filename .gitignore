@@ -24,6 +24,12 @@
 # Configuración con credenciales (usar wp-config-sample.php como plantilla)
 /wp-config.php
 
+# Idiomas (traducciones generadas por WordPress automáticamente)
+/wp-content/languages/
+# Si tienes traducciones propias, descomenta y ajusta:
+# !/wp-content/languages/themes/tu-tema-es_ES.po
+# !/wp-content/languages/themes/tu-tema-es_ES.mo
+
 # Uploads y archivos generados por usuarios
 /wp-content/uploads/
 /wp-content/upgrade/
