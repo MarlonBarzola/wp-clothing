@@ -189,23 +189,58 @@
         });
     });
 
-    // ── Product tabs (Best Sellers section) ──────────────────
+    // ── Product tab swipers ───────────────────────────────────
+    const tabSwipers = new Map();
+
+    document.querySelectorAll('.wpc-tabs-swiper').forEach(el => {
+        const panel  = el.closest('.wpc-product-tabs__panel');
+        const prevEl = panel.querySelector('.wpc-tabs-nav--prev');
+        const nextEl = panel.querySelector('.wpc-tabs-nav--next');
+
+        const swiper = new Swiper(el, {
+            slidesPerView: 1,
+            spaceBetween: 16,
+            navigation: { prevEl, nextEl },
+            breakpoints: {
+                480:  { slidesPerView: 2 },
+                768:  { slidesPerView: 3 },
+                1024: { slidesPerView: 4 },
+            },
+            a11y: {
+                prevSlideMessage: 'Productos anteriores',
+                nextSlideMessage: 'Productos siguientes',
+            },
+        });
+
+        if (panel.id) tabSwipers.set(panel.id, swiper);
+    });
+
+    // ── Product tabs switching ────────────────────────────────
     document.querySelectorAll('.wpc-product-tabs__tab').forEach(tab => {
         tab.addEventListener('click', () => {
             const target = tab.dataset.tab;
             const parent = tab.closest('.wpc-product-tabs');
 
-            parent.querySelectorAll('.wpc-product-tabs__tab')
-                  .forEach(t => t.classList.remove('is-active'));
+            parent.querySelectorAll('.wpc-product-tabs__tab').forEach(t => {
+                t.classList.remove('is-active');
+                t.setAttribute('aria-selected', 'false');
+            });
             parent.querySelectorAll('.wpc-product-tabs__panel')
                   .forEach(p => p.classList.remove('is-active'));
 
             tab.classList.add('is-active');
-            parent.querySelector(`[data-panel="${target}"]`)
-                  ?.classList.add('is-active');
+            tab.setAttribute('aria-selected', 'true');
+
+            const panel = parent.querySelector(`#wpc-panel-${target}`);
+            if (panel) {
+                panel.classList.add('is-active');
+                const swiper = tabSwipers.get(`wpc-panel-${target}`);
+                if (swiper) { swiper.update(); swiper.slideTo(0, 0); }
+            }
         });
     });
 
+    // Activate first tab of each widget
     document.querySelectorAll('.wpc-product-tabs').forEach(widget => {
         widget.querySelector('.wpc-product-tabs__tab')?.click();
     });

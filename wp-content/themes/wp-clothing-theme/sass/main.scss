@@ -29,6 +29,7 @@
 @use 'components/testimonials';
 @use 'components/newsletter';
 @use 'components/badges';
+@use 'components/product-tabs';
 
 // 5. Pages (page-specific overrides)
 @use 'pages/home';
@@ -41,3 +42,6 @@
 @use 'utilities/spacing';
 @use 'utilities/colors';
 @use 'utilities/visibility';
+
+// 7. Plugin compatibility (third-party overrides — always last)
+@use 'utilities/plugins';

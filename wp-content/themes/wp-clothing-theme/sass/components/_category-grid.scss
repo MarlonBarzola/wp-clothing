@@ -24,13 +24,14 @@
     @include overlay(rgba($color-dark, .25));
 
     &__image {
-        @include aspect-ratio(3, 4);
+        @include aspect-ratio(4, 5);
         width: 100%;
 
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: top center;
             transition: transform $transition-slow;
         }
     }

@@ -1,0 +1,9 @@
+// ============================================================
+//  PLUGIN COMPATIBILITY OVERRIDES
+//  Fixes z-index and layout conflicts with third-party plugins
+// ============================================================
+
+// ── Side Cart WooCommerce (XootiX) ───────────────────────────
+// Hide the floating basket button — we use our own cart icon in the header
+.xoo-wsc-basket { display: none !important; }
+.xoo-wsc-basket[style*="block"] { display: none !important; }

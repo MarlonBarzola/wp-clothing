@@ -1,0 +1,186 @@
+// ============================================================
+//  COMPONENTS: PRODUCT TABS
+//  Shortcode [wpc_product_tabs]
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+.wpc-product-tabs {
+    padding-block: $space-6;
+
+    // ── Header row: title | tabs | ver más ───────────────────
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: $space-3;
+        margin-bottom: $space-4;
+
+        @include max-respond-to(md) {
+            flex-wrap: wrap;
+            gap: $space-2;
+        }
+    }
+
+    &__title {
+        font-family: $font-heading;
+        font-size: $font-size-xl;
+        font-weight: 700;
+        color: $color-dark;
+        white-space: nowrap;
+        margin: 0;
+        flex-shrink: 0;
+
+        @include max-respond-to(md) {
+            font-size: $font-size-lg;
+            width: 100%;
+        }
+    }
+
+    // ── Tab nav (centro) ─────────────────────────────────────
+    &__nav {
+        display: flex;
+        align-items: center;
+        gap: $space-1;
+        flex: 1;
+        justify-content: center;
+
+        @include max-respond-to(md) {
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+    }
+
+    &__tab {
+        position: relative;
+        background: none;
+        border: none;
+        padding: .35rem .85rem;
+        font-family: $font-body;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        color: $color-text;
+        cursor: pointer;
+        letter-spacing: .02em;
+        border-radius: $radius-pill;
+        transition: color $transition-fast, background $transition-fast;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 60%;
+            height: 2px;
+            background: $color-primary-dark;
+            border-radius: $radius-pill;
+            transition: transform $transition-base;
+        }
+
+        &:hover {
+            color: $color-dark;
+        }
+
+        &.is-active {
+            color: $color-dark;
+            font-weight: 700;
+
+            &::after {
+                transform: translateX(-50%) scaleX(1);
+            }
+        }
+    }
+
+    // ── "Ver más" link (derecha) ─────────────────────────────
+    &__view-all {
+        display: inline-flex;
+        align-items: center;
+        gap: .3rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+        font-family: $font-body;
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: $color-text;
+        text-decoration: none;
+        letter-spacing: .03em;
+        transition: color $transition-fast, gap $transition-fast;
+
+        svg {
+            transition: transform $transition-fast;
+        }
+
+        &:hover {
+            color: $color-primary-dark;
+            gap: .5rem;
+
+            svg {
+                transform: translateX(2px);
+            }
+        }
+
+        @include max-respond-to(md) {
+            margin-left: auto;
+        }
+    }
+
+    // ── Panels ───────────────────────────────────────────────
+    &__panel {
+        display: none;
+
+        &.is-active {
+            display: block;
+        }
+    }
+
+    &__empty {
+        text-align: center;
+        color: $color-text;
+        font-size: $font-size-sm;
+        padding-block: $space-4;
+    }
+
+    // ── Carousel wrapper ─────────────────────────────────────
+    &__carousel {
+        position: relative;
+    }
+}
+
+// ── Swiper nav buttons ───────────────────────────────────────
+.wpc-tabs-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid $color-border;
+    background: $color-white;
+    box-shadow: $shadow-sm;
+    cursor: pointer;
+    @include flex-center;
+    transition: background $transition-fast, box-shadow $transition-fast, border-color $transition-fast;
+
+    svg {
+        width: 16px;
+        height: 16px;
+        color: $color-dark;
+        transition: color $transition-fast;
+    }
+
+    &:hover {
+        background: $color-primary;
+        border-color: $color-primary;
+        box-shadow: $shadow-md;
+
+        svg { color: $color-white; }
+    }
+
+    &--prev { left: -18px; }
+    &--next { right: -18px; }
+
+    @include max-respond-to(md) {
+        display: none;
+    }
+}

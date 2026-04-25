@@ -109,8 +109,7 @@ defined( 'ABSPATH' ) || exit;
             </a>
 
             <!-- Cart -->
-            <a class="wpc-icon-btn wpc-icon-btn--cart"
-               href="<?php echo esc_url( wc_get_cart_url() ); ?>"
+            <button type="button" class="wpc-icon-btn wpc-icon-btn--cart xoo-wsc-cart-trigger"
                aria-label="<?php echo esc_attr( sprintf( __( 'Carrito — %d artículos', 'wp-clothing-theme' ), WC()->cart ? WC()->cart->get_cart_contents_count() : 0 ) ); ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
                      viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -118,12 +117,10 @@ defined( 'ABSPATH' ) || exit;
                     <line x1="3" y1="6" x2="21" y2="6"/>
                     <path d="M16 10a4 4 0 0 1-8 0"/>
                 </svg>
-                <?php if ( WC()->cart && WC()->cart->get_cart_contents_count() > 0 ) : ?>
-                    <span class="count" aria-hidden="true">
-                        <?php echo esc_html( WC()->cart->get_cart_contents_count() ); ?>
-                    </span>
-                <?php endif; ?>
-            </a>
+                <span class="count js-cart-count<?php echo ( WC()->cart && WC()->cart->get_cart_contents_count() > 0 ) ? '' : ' count--empty'; ?>" aria-hidden="true">
+                    <?php echo WC()->cart ? esc_html( WC()->cart->get_cart_contents_count() ) : '0'; ?>
+                </span>
+            </button>
 
             <!-- Hamburger — mobile only -->
             <button class="wpc-header__burger js-burger hide-desktop"
