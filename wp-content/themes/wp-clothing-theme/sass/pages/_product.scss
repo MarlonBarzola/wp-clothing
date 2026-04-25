@@ -1,0 +1,60 @@
+// ============================================================
+//  PAGES: SINGLE PRODUCT
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+.wpc-single-product {
+    @include container;
+    padding-block: $space-6;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-6;
+
+    @include max-respond-to(md) { grid-template-columns: 1fr; }
+}
+
+// WooCommerce summary overrides
+.woocommerce div.product {
+    div.summary {
+        .product_title {
+            font-size: $font-size-2xl;
+            margin-bottom: $space-1;
+        }
+
+        .price {
+            font-size: $font-size-xl;
+            color: $color-dark;
+            ins { text-decoration: none; }
+            del { color: lighten($color-text, 25%); margin-right: .5rem; }
+        }
+
+        .woocommerce-product-details__short-description {
+            color: $color-text;
+            margin-block: $space-3;
+        }
+    }
+
+    // Gallery
+    .woocommerce-product-gallery {
+        .woocommerce-product-gallery__wrapper img {
+            border-radius: $radius-md;
+        }
+    }
+}
+
+// Add to cart button
+.woocommerce #respond input#submit,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button {
+    background: $color-dark !important;
+    color: $color-white !important;
+    border-radius: $radius-pill !important;
+    font-weight: 700 !important;
+    padding: .8rem 2rem !important;
+    letter-spacing: .05em !important;
+    transition: background $transition-base !important;
+
+    &:hover { background: $color-primary-dark !important; }
+}

@@ -1,0 +1,31 @@
+// ============================================================
+//  UTILITIES: VISIBILITY
+// ============================================================
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+.sr-only { @include sr-only; }
+
+.hidden         { display: none !important; }
+.visible        { display: block !important; }
+
+.d-flex         { display: flex; }
+.d-grid         { display: grid; }
+.d-block        { display: block; }
+.d-inline-block { display: inline-block; }
+
+.flex-wrap      { flex-wrap: wrap; }
+.items-center   { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.gap-1          { gap: $space-1; }
+.gap-2          { gap: $space-2; }
+.gap-3          { gap: $space-3; }
+
+// Responsive hiding
+@include max-respond-to(md) {
+    .hide-mobile { display: none !important; }
+}
+@include respond-to(md) {
+    .hide-desktop { display: none !important; }
+}

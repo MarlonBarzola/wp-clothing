@@ -1,0 +1,117 @@
+// ============================================================
+//  COMPONENTS: HERO SLIDER
+//  Used in the full-width hero at the top of home page
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+.wpc-hero {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    overflow: hidden;
+
+    &__slide {
+        @include aspect-ratio(16, 7);
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+
+        @include max-respond-to(md) {
+            @include aspect-ratio(4, 3);
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to right,
+            rgba($color-dark, .55) 0%,
+            rgba($color-dark, .10) 70%
+        );
+    }
+
+    &__content {
+        @include container;
+        position: relative;
+        z-index: 2;
+        color: $color-white;
+        max-width: 620px;
+    }
+
+    &__eyebrow {
+        @include eyebrow-styles;
+        color: rgba($color-white, .85);
+        margin-bottom: $space-2;
+    }
+
+    &__title {
+        font-size: clamp(2rem, 6vw, 4.5rem);
+        color: $color-white;
+        margin-bottom: $space-3;
+        line-height: 1.1;
+    }
+
+    &__cta {
+        margin-top: $space-4;
+        display: flex;
+        gap: $space-2;
+        flex-wrap: wrap;
+    }
+
+    &__subtitle {
+        font-size: $font-size-lg;
+        color: rgba($color-white, .85);
+        margin-top: -$space-1; // tighten gap below title
+        margin-bottom: $space-1;
+    }
+
+    // ── Swiper overrides ─────────────────────────────────────
+    // Make the swiper fill the full hero height
+    &.swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        // Each slide needs display:flex so content centers vertically
+        display: flex;
+        align-items: center;
+        min-height: 80vh;
+        background-size: cover;
+        background-position: center;
+
+        @include max-respond-to(md) { min-height: 60vh; }
+        @include max-respond-to(sm) { min-height: 50vh; }
+    }
+
+    // Navigation arrows
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: $color-white;
+        width: 44px;
+        height: 44px;
+        background: rgba($color-dark, .35);
+        border-radius: 50%;
+        transition: background $transition-base;
+
+        &::after { font-size: 1rem; font-weight: 700; }
+        &:hover   { background: rgba($color-dark, .65); }
+    }
+
+    // Pagination dots
+    .swiper-pagination-bullet {
+        background: rgba($color-white, .6);
+        opacity: 1;
+        width: 8px;
+        height: 8px;
+        transition: background $transition-base, transform $transition-base;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: $color-primary;
+        transform: scale(1.3);
+    }
+}

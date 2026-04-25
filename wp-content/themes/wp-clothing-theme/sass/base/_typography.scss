@@ -1,0 +1,39 @@
+// ============================================================
+//  BASE: TYPOGRAPHY
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+body {
+    font-family: $font-body;
+    font-size: $font-size-base;
+    line-height: $line-height;
+    color: $color-text;
+    background-color: $color-white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-heading;
+    color: $color-dark;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+h1 { font-size: clamp(2rem, 5vw, #{$font-size-4xl}); }
+h2 { font-size: clamp(1.5rem, 3.5vw, #{$font-size-3xl}); }
+h3 { font-size: clamp(1.25rem, 2.5vw, #{$font-size-2xl}); }
+h4 { font-size: $font-size-xl; }
+h5 { font-size: $font-size-lg; }
+h6 { font-size: $font-size-md; }
+
+p {
+    margin-bottom: 1rem;
+    &:last-child { margin-bottom: 0; }
+}
+
+small { font-size: $font-size-sm; }
+
+strong { font-weight: 700; }
+
+// Eyebrow / label text (like "SPRING / 2022" in demo)
+.eyebrow { @include eyebrow-styles; }

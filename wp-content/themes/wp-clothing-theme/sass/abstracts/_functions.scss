@@ -1,0 +1,48 @@
+// ============================================================
+//  ABSTRACTS: FUNCTIONS
+// ============================================================
+@use 'variables' as *;
+@use 'sass:math';
+
+// rem() — convert px to rem
+// Usage: font-size: rem(18)
+@function rem($px) {
+    @return math.div($px, 16) * 1rem;
+}
+
+// em() — convert px to em (relative to parent)
+@function em($px, $base: 16) {
+    @return math.div($px, $base) * 1em;
+}
+
+// spacing() — return a step from the spacing scale
+// Usage: margin: spacing(3)  → 1.5rem
+@function spacing($step) {
+    $scale: (
+        1: $space-1,
+        2: $space-2,
+        3: $space-3,
+        4: $space-4,
+        5: $space-5,
+        6: $space-6,
+        7: $space-7,
+        8: $space-8,
+    );
+    @if map-has-key($scale, $step) {
+        @return map-get($scale, $step);
+    }
+    @warn "Spacing step `#{$step}` not found.";
+    @return null;
+}
+
+// z() — return z-index from named layer
+@function z($layer) {
+    $layers: (
+        dropdown: $z-dropdown,
+        sticky:   $z-sticky,
+        overlay:  $z-overlay,
+        modal:    $z-modal,
+        toast:    $z-toast,
+    );
+    @return map-get($layers, $layer);
+}

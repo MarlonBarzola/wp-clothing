@@ -1,0 +1,58 @@
+// ============================================================
+//  PAGES: SHOP
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+.wpc-shop-layout {
+    @include container;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: $space-5;
+    padding-block: $space-6;
+
+    @include max-respond-to(lg) { grid-template-columns: 1fr; }
+}
+
+.wpc-shop-sidebar {
+    @include max-respond-to(lg) { display: none; }
+
+    &.is-open { display: block; }
+
+    &__widget {
+        margin-bottom: $space-4;
+        border-bottom: 1px solid $color-border;
+        padding-bottom: $space-4;
+
+        &:last-child { border-bottom: none; }
+    }
+
+    &__title {
+        font-size: $font-size-sm;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        margin-bottom: $space-2;
+        color: $color-dark;
+    }
+}
+
+// Price filter (WooCommerce widget override)
+.widget_price_filter .price_slider_wrapper {
+    .ui-slider-range { background: $color-primary; }
+    .ui-slider-handle { background: $color-dark; border-color: $color-dark; }
+}
+
+// Shop toolbar (results count + ordering)
+.woocommerce-result-count,
+.woocommerce-ordering select {
+    font-size: $font-size-sm;
+    color: $color-text;
+}
+
+.woocommerce-ordering select {
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    padding: .4rem .75rem;
+    &:focus { @include focus-ring; }
+}

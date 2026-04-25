@@ -49,6 +49,7 @@
 /wp-content/themes/twentythree*/
 /wp-content/themes/twentyfour*/
 /wp-content/themes/twentyfive*/
+/wp-content/themes/hello-elementor*/
 
 # Archivos de sistema y editores
 .DS_Store

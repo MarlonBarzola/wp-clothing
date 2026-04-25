@@ -1,0 +1,19 @@
+// ============================================================
+//  UTILITIES: COLORS
+// ============================================================
+@use '../abstracts/variables' as *;
+
+.text-primary      { color: $color-primary !important; }
+.text-dark         { color: $color-dark !important; }
+.text-muted        { color: $color-text !important; }
+.text-white        { color: $color-white !important; }
+.text-sale         { color: $color-sale !important; }
+.text-center       { text-align: center !important; }
+.text-left         { text-align: left !important; }
+.text-right        { text-align: right !important; }
+
+.bg-primary        { background-color: $color-primary !important; }
+.bg-secondary      { background-color: $color-secondary !important; }
+.bg-dark           { background-color: $color-dark !important; }
+.bg-light          { background-color: $color-light !important; }
+.bg-white          { background-color: $color-white !important; }

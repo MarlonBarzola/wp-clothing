@@ -1,0 +1,13 @@
+{
+  "name": "wp-clothing-theme",
+  "version": "1.0.0",
+  "description": "WooCommerce fashion store child theme — Hello Elementor",
+  "scripts": {
+    "sass": "sass --style=compressed --no-source-map sass/main.scss assets/css/main.css",
+    "sass:dev": "sass --watch --source-map sass/main.scss assets/css/main.css",
+    "sass:build": "sass --style=compressed sass/main.scss assets/css/main.css"
+  },
+  "devDependencies": {
+    "sass": "1.49.11"
+  }
+}

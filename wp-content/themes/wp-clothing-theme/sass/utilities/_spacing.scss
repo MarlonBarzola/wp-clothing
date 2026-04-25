@@ -1,0 +1,29 @@
+// ============================================================
+//  UTILITIES: SPACING
+// ============================================================
+@use '../abstracts/variables' as *;
+
+// Margin / Padding utility classes
+// Pattern: .mt-{n}  .mb-{n}  .my-{n}  .mx-{n}  .pt-{n} etc.
+// n = 1..8 maps to the spacing scale
+
+$sides: (t: top, b: bottom, l: left, r: right);
+$scale: (1: $space-1, 2: $space-2, 3: $space-3, 4: $space-4,
+         5: $space-5, 6: $space-6, 7: $space-7, 8: $space-8);
+
+@each $n, $val in $scale {
+    .mt-#{$n} { margin-top:    $val; }
+    .mb-#{$n} { margin-bottom: $val; }
+    .ml-#{$n} { margin-left:   $val; }
+    .mr-#{$n} { margin-right:  $val; }
+    .my-#{$n} { margin-block:  $val; }
+    .mx-#{$n} { margin-inline: $val; }
+    .pt-#{$n} { padding-top:    $val; }
+    .pb-#{$n} { padding-bottom: $val; }
+    .pl-#{$n} { padding-left:   $val; }
+    .pr-#{$n} { padding-right:  $val; }
+    .py-#{$n} { padding-block:  $val; }
+    .px-#{$n} { padding-inline: $val; }
+}
+
+.mx-auto { margin-inline: auto; }

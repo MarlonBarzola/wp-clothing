@@ -1,0 +1,86 @@
+// ============================================================
+//  COMPONENTS: BANNER (promo / collection banners)
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+// Two-column banner row (like "Mix & Match" + "Cute & Comfy")
+.wpc-banners {
+    @include container;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-3;
+
+    @include max-respond-to(md) { grid-template-columns: 1fr; }
+}
+
+.wpc-banner {
+    position: relative;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    min-height: 420px;
+    cursor: pointer;
+
+    &__bg {
+        position: absolute;
+        inset: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform $transition-slow;
+        }
+    }
+
+    &:hover &__bg img { transform: scale(1.05); }
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba($color-dark, .65) 0%, transparent 60%);
+        z-index: 1;
+    }
+
+    &__content {
+        position: relative;
+        z-index: 2;
+        padding: $space-4;
+        color: $color-white;
+    }
+
+    &__subtitle {
+        font-size: $font-size-xs;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        margin-bottom: $space-1;
+        opacity: .85;
+    }
+
+    &__title {
+        font-family: $font-heading;
+        font-size: $font-size-2xl;
+        color: $color-white;
+        margin-bottom: $space-2;
+    }
+
+    &__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        font-size: $font-size-sm;
+        font-weight: 700;
+        color: $color-white;
+        letter-spacing: .05em;
+        border-bottom: 1px solid rgba($color-white, .6);
+        padding-bottom: 2px;
+        transition: gap $transition-fast, border-color $transition-fast;
+
+        &:hover { gap: .75rem; border-color: $color-white; }
+
+        &::after { content: '→'; }
+    }
+}

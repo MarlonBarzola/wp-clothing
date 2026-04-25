@@ -1,0 +1,15 @@
+// ── pages/_checkout.scss ─────────────────────────────────────
+// Cart overrides are in _cart.scss (shared).
+// Additional checkout-specific overrides go here.
+@use '../abstracts/variables' as *;
+
+.woocommerce-checkout #payment {
+    background: transparent;
+    border-radius: 0;
+
+    .payment_methods {
+        border-color: var(--clr-border);
+
+        .payment_method_paypal label img { max-height: 26px; }
+    }
+}

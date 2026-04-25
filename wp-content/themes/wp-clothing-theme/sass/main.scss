@@ -1,0 +1,43 @@
+// ============================================================
+//  MAIN SASS ENTRY POINT
+//  Compiled → assets/css/main.css
+//  Run:  npm run sass
+// ============================================================
+
+// 1. Abstracts (variables, mixins, functions — no output)
+@use 'abstracts/variables'  as *;
+@use 'abstracts/mixins'     as *;
+@use 'abstracts/functions'  as *;
+
+// 2. Base (resets, typography, root custom properties)
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/root';
+
+// 3. Layout (grid, header, footer, containers)
+@use 'layout/grid';
+@use 'layout/header';
+@use 'layout/footer';
+
+// 4. Components (reusable UI blocks)
+@use 'components/buttons';
+@use 'components/cards';
+@use 'components/hero';
+@use 'components/category-grid';
+@use 'components/product-card';
+@use 'components/banner';
+@use 'components/testimonials';
+@use 'components/newsletter';
+@use 'components/badges';
+
+// 5. Pages (page-specific overrides)
+@use 'pages/home';
+@use 'pages/shop';
+@use 'pages/product';
+@use 'pages/cart';
+@use 'pages/checkout';
+
+// 6. Utilities (helpers, spacing, visibility)
+@use 'utilities/spacing';
+@use 'utilities/colors';
+@use 'utilities/visibility';

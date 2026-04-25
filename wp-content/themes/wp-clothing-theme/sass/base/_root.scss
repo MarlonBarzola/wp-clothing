@@ -1,0 +1,43 @@
+// ============================================================
+//  BASE: ROOT — CSS Custom Properties
+//  Allows Elementor Global Colors to coexist with SASS tokens
+// ============================================================
+@use '../abstracts/variables' as *;
+
+:root {
+    // Brand colors
+    --clr-primary:       #{$color-primary};
+    --clr-primary-dark:  #{$color-primary-dark};
+    --clr-secondary:     #{$color-secondary};
+    --clr-accent:        #{$color-accent};
+    --clr-dark:          #{$color-dark};
+    --clr-text:          #{$color-text};
+    --clr-light:         #{$color-light};
+    --clr-white:         #{$color-white};
+    --clr-border:        #{$color-border};
+    --clr-sale:          #{$color-sale};
+    --clr-new:           #{$color-new};
+
+    // Fonts
+    --font-heading: #{$font-heading};
+    --font-body:    #{$font-body};
+
+    // Spacing
+    --space-1: #{$space-1};
+    --space-2: #{$space-2};
+    --space-3: #{$space-3};
+    --space-4: #{$space-4};
+    --space-5: #{$space-5};
+    --space-6: #{$space-6};
+
+    // Borders
+    --radius-sm:   #{$radius-sm};
+    --radius-md:   #{$radius-md};
+    --radius-lg:   #{$radius-lg};
+    --radius-pill: #{$radius-pill};
+
+    // Shadows
+    --shadow-sm: #{$shadow-sm};
+    --shadow-md: #{$shadow-md};
+    --shadow-lg: #{$shadow-lg};
+}

@@ -1,0 +1,67 @@
+// ============================================================
+//  PAGES: CART & CHECKOUT (shared base)
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+.woocommerce-cart,
+.woocommerce-checkout {
+    .wpc-woo-content {
+        @include container;
+        padding-block: $space-6;
+    }
+}
+
+// Cart table
+.woocommerce table.shop_table {
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    overflow: hidden;
+    font-size: $font-size-sm;
+
+    th {
+        background: $color-light;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: $font-size-xs;
+        letter-spacing: .06em;
+        color: $color-dark;
+    }
+
+    td, th { padding: $space-2 $space-3; border-color: $color-border; }
+
+    .product-thumbnail img { border-radius: $radius-sm; width: 80px; }
+}
+
+// Checkout form
+.woocommerce-checkout {
+    .woocommerce-billing-fields h3,
+    .woocommerce-shipping-fields h3,
+    #order_review_heading {
+        font-size: $font-size-xl;
+        margin-bottom: $space-3;
+    }
+
+    .form-row label {
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: $color-dark;
+        margin-bottom: 4px;
+    }
+
+    .form-row input.input-text,
+    .form-row select,
+    .form-row textarea {
+        border: 1px solid $color-border;
+        border-radius: $radius-sm;
+        padding: .65rem 1rem;
+        font-size: $font-size-sm;
+        width: 100%;
+        transition: border-color $transition-fast;
+
+        &:focus {
+            outline: none;
+            border-color: $color-primary;
+        }
+    }
+}

@@ -1,0 +1,83 @@
+// ============================================================
+//  COMPONENTS: BUTTONS
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+// Base
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .75rem 2rem;
+    border-radius: $radius-pill;
+    font-family: $font-body;
+    font-size: $font-size-sm;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    transition: background $transition-base, color $transition-base,
+                transform $transition-fast, box-shadow $transition-base;
+    cursor: pointer;
+    border: 2px solid transparent;
+    white-space: nowrap;
+
+    &:hover { transform: translateY(-2px); }
+    &:active { transform: translateY(0); }
+    &:focus-visible { @include focus-ring; }
+}
+
+// Variants
+.btn--primary {
+    background: $color-dark;
+    color: $color-white;
+    border-color: $color-dark;
+
+    &:hover {
+        background: $color-primary-dark;
+        border-color: $color-primary-dark;
+    }
+}
+
+.btn--outline {
+    background: transparent;
+    color: $color-white;
+    border-color: $color-white;
+
+    &:hover {
+        background: $color-white;
+        color: $color-dark;
+    }
+}
+
+.btn--secondary {
+    background: $color-primary;
+    color: $color-dark;
+    border-color: $color-primary;
+
+    &:hover {
+        background: $color-primary-dark;
+        border-color: $color-primary-dark;
+        color: $color-white;
+    }
+}
+
+.btn--link {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: $color-dark;
+    font-weight: 700;
+    text-decoration: underline;
+    border-radius: 0;
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: inherit;
+
+    &:hover { color: $color-primary-dark; transform: none; }
+}
+
+// Sizes
+.btn--sm { padding: .5rem 1.25rem; font-size: $font-size-xs; }
+.btn--lg { padding: 1rem 2.5rem;   font-size: $font-size-md; }

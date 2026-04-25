@@ -1,0 +1,93 @@
+// ============================================================
+//  PAGES: HOME
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+// Tabbed product section (Best Sellers — Baby / Girls / Boys tabs)
+.wpc-product-tabs {
+    @include container;
+
+    &__nav {
+        display: flex;
+        justify-content: center;
+        gap: $space-2;
+        margin-bottom: $space-4;
+        flex-wrap: wrap;
+    }
+
+    &__tab {
+        padding: .5rem 1.5rem;
+        border-radius: $radius-pill;
+        font-size: $font-size-sm;
+        font-weight: 700;
+        letter-spacing: .05em;
+        border: 2px solid $color-border;
+        color: $color-text;
+        transition: all $transition-base;
+        cursor: pointer;
+
+        &.is-active,
+        &:hover {
+            background: $color-dark;
+            border-color: $color-dark;
+            color: $color-white;
+        }
+    }
+
+    &__panel { display: none; &.is-active { display: block; } }
+}
+
+// Community / blog section
+.wpc-community {
+    @include container;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-4;
+    align-items: center;
+
+    @include max-respond-to(md) { grid-template-columns: 1fr; }
+
+    &__content {
+        &__eyebrow { @include eyebrow-styles; margin-bottom: $space-2; }
+        &__title   { margin-bottom: $space-3; }
+        &__text    { margin-bottom: $space-4; color: $color-text; }
+    }
+
+    &__image {
+        border-radius: $radius-lg;
+        overflow: hidden;
+        img { width: 100%; object-fit: cover; }
+    }
+}
+
+// Why organic / brand story section
+.wpc-brand-story {
+    background: $color-secondary;
+    padding: $space-7 0;
+
+    &__inner {
+        @include container;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $space-6;
+        align-items: center;
+
+        @include max-respond-to(md) {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+    }
+
+    &__image {
+        border-radius: $radius-lg;
+        overflow: hidden;
+        img { width: 100%; object-fit: cover; }
+    }
+
+    &__content {
+        &__eyebrow { @include eyebrow-styles; margin-bottom: $space-2; }
+        &__title   { margin-bottom: $space-3; }
+        &__text    { color: $color-text; margin-bottom: $space-4; }
+    }
+}

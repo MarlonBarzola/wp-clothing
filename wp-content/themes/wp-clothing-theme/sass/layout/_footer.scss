@@ -1,0 +1,97 @@
+// ============================================================
+//  LAYOUT: FOOTER
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+.wpc-footer {
+    background: $color-dark;
+    color: rgba($color-white, .8);
+    font-size: $font-size-sm;
+
+    &__top {
+        @include container;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: $space-6;
+        padding-top: $space-7;
+        padding-bottom: $space-6;
+
+        @include max-respond-to(lg) { grid-template-columns: 1fr 1fr; }
+        @include max-respond-to(sm) { grid-template-columns: 1fr; }
+    }
+
+    &__logo {
+        img { height: 40px; filter: brightness(0) invert(1); margin-bottom: $space-2; }
+    }
+
+    &__about {
+        font-size: $font-size-sm;
+        line-height: 1.7;
+        opacity: .75;
+        margin-bottom: $space-3;
+    }
+
+    &__social {
+        display: flex;
+        gap: $space-2;
+
+        a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba($color-white, .3);
+            @include flex-center;
+            color: $color-white;
+            font-size: $font-size-sm;
+            transition: background $transition-base, border-color $transition-base;
+
+            &:hover {
+                background: $color-primary;
+                border-color: $color-primary;
+            }
+        }
+    }
+
+    &__col-title {
+        font-family: $font-heading;
+        font-size: $font-size-md;
+        color: $color-white;
+        font-weight: 700;
+        margin-bottom: $space-3;
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: column;
+        gap: $space-1;
+
+        a {
+            opacity: .75;
+            transition: opacity $transition-fast, padding-left $transition-fast;
+
+            &:hover { opacity: 1; padding-left: 6px; }
+        }
+    }
+
+    &__bottom {
+        border-top: 1px solid rgba($color-white, .1);
+        padding: $space-3 $space-4;
+
+        &__inner {
+            @include container;
+            @include flex-between;
+            flex-wrap: wrap;
+            gap: $space-2;
+            font-size: $font-size-xs;
+            opacity: .6;
+        }
+    }
+
+    &__payments {
+        display: flex;
+        gap: $space-1;
+        align-items: center;
+        img { height: 22px; opacity: .6; filter: grayscale(1); }
+    }
+}

@@ -1,0 +1,34 @@
+// ============================================================
+//  COMPONENTS: CARDS (generic)
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+.card {
+    background: $color-white;
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm;
+    overflow: hidden;
+    transition: box-shadow $transition-base, transform $transition-base;
+
+    &:hover {
+        box-shadow: $shadow-hover;
+        transform: translateY(-3px);
+    }
+
+    &__media {
+        overflow: hidden;
+        img {
+            width: 100%;
+            object-fit: cover;
+            transition: transform $transition-slow;
+        }
+    }
+
+    &:hover &__media img { transform: scale(1.04); }
+
+    &__body { padding: $space-3; }
+    &__title { margin-bottom: $space-1; }
+    &__text { font-size: $font-size-sm; color: $color-text; }
+    &__footer { padding: $space-2 $space-3; border-top: 1px solid $color-border; }
+}
