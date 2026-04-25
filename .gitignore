@@ -1,0 +1,74 @@
+# =============================================
+# WordPress - Solo versionar código propio
+# =============================================
+
+# WordPress Core
+/index.php
+/license.txt
+/readme.html
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
+/xmlrpc.php
+/wp-admin/
+/wp-includes/
+
+# Configuración con credenciales (usar wp-config-sample.php como plantilla)
+/wp-config.php
+
+# Uploads y archivos generados por usuarios
+/wp-content/uploads/
+/wp-content/upgrade/
+/wp-content/backup-db/
+/wp-content/backups/
+/wp-content/blogs.dir/
+/wp-content/cache/
+
+# Plugins de terceros (instalar vía Composer o documentar manualmente)
+/wp-content/plugins/*
+!/wp-content/plugins/index.php
+
+# Temas de terceros (mantener solo los propios)
+/wp-content/themes/twentytwenty*/
+/wp-content/themes/twentyone*/
+/wp-content/themes/twentytwo*/
+/wp-content/themes/twentythree*/
+/wp-content/themes/twentyfour*/
+/wp-content/themes/twentyfive*/
+
+# Archivos de sistema y editores
+.DS_Store
+Thumbs.db
+*.log
+*.bak
+*.swp
+*.swo
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+# Dependencias de Node (si usas build tools)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Archivos de build (si aplica)
+dist/
+build/
+
+# Composer (vendors de PHP si aplica)
+vendor/
