@@ -32,7 +32,11 @@
             opacity: .8;
             transition: opacity $transition-fast;
             white-space: nowrap;
-            &:hover { opacity: 1; text-decoration: underline; }
+            &:hover { 
+                color: $color-white;
+                opacity: 1;
+                text-decoration: underline; 
+            }
         }
     }
 

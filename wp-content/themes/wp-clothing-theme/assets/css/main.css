@@ -216,6 +216,7 @@ strong {
   white-space: nowrap;
 }
 .wpc-topbar__links a:hover {
+  color: #ffffff;
   opacity: 1;
   text-decoration: underline;
 }
