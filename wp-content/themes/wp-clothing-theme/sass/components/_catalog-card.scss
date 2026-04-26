@@ -1,0 +1,311 @@
+// ============================================================
+//  COMPONENTS: CATALOG CARD  — Baby clothing store
+//
+//  Design spec:
+//  · No visible border — background #f9f9f9, radius 15px
+//  · Serif title (Cormorant Garamond) / Sans price (DM Sans)
+//  · "Añadir" overlay button with scalloped top edge (CSS mask)
+//  · Circular "Nuevo" badge (top-right, terracotta)
+//  · Zero box-shadows — flat geometry only
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+// ══════════════════════════════════════════════════════════════
+//  CARD SHELL
+// ══════════════════════════════════════════════════════════════
+.catalog-card {
+    position: relative;
+    background: $catalog-card-bg;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    // Lift-only transition — no shadows, pure geometry
+    transition: transform $transition-base;
+
+    &:hover {
+        transform: translateY(-5px);
+
+        .catalog-card__add-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .catalog-card__img {
+            transform: scale(1.04);
+        }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  IMAGE ZONE
+// ══════════════════════════════════════════════════════════════
+.catalog-card__img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    // Square top corners inherit parent's 15px, bottom is flat
+    border-radius: 15px 15px 0 0;
+    display: block;
+}
+
+.catalog-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform .5s ease;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  BADGE  —  "NUEVO" circular floating tag  (top-right corner)
+// ══════════════════════════════════════════════════════════════
+.catalog-card__badge-new {
+    position: absolute;
+    top: $space-2;
+    right: $space-2;
+    z-index: 4;
+
+    // Perfect circle with fluid size
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+
+    // Flat terracotta plane — no shadow
+    background: $catalog-terracotta;
+    color: $color-white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    font-family: $font-catalog-body;
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    line-height: 1.1;
+
+    // Subtle rotation adds dynamism without weight
+    transform: rotate(-8deg);
+    pointer-events: none;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  WAVE ADD-TO-CART BUTTON  (overlaid on the image, bottom)
+//
+//  The scalloped / festoneado top edge is achieved with a CSS
+//  mask built from a repeating radial-gradient:
+//
+//   mask-image: radial-gradient(
+//     circle at 50%  <negative offset>,   ← center above the tile
+//     transparent    <radius>,            ← cut-out circle
+//     #000           <radius + 1px>       ← opaque fill below
+//   );
+//   mask-size: <wave-period> 100%;        ← tile width = one arch
+//   mask-repeat: repeat-x;
+//   mask-position: top center;
+//
+//  Result: a row of convex arches bitten from the top edge.
+// ══════════════════════════════════════════════════════════════
+.catalog-card__add-btn {
+    // ── Positioning ───────────────────────────────────────────
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+
+    // ── Layout ────────────────────────────────────────────────
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+
+    // Extra top padding absorbs the wave cutout depth (wave-r = 9px)
+    padding: 1.4rem 1rem .9rem;
+
+    // ── Flat navy plane ───────────────────────────────────────
+    background: $catalog-navy;
+    color: $color-white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+
+    // ── Typography ────────────────────────────────────────────
+    font-family: $font-catalog-body;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    // ── Entrance animation ────────────────────────────────────
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+        opacity   .3s ease,
+        transform .3s ease,
+        background $transition-fast;
+
+    // ══════════════════════════════════════════════════════════
+    //  CSS MASK — scalloped / wave top edge
+    //  --wave-r : radius of each semicircle (arch depth)
+    //  --wave-w : period / width of one arch
+    // ══════════════════════════════════════════════════════════
+    --wave-r: 9px;
+    --wave-w: 18px;
+
+    -webkit-mask-image: radial-gradient(
+        circle at 50% calc(-1 * var(--wave-r)),
+        transparent var(--wave-r),
+        #000 calc(var(--wave-r) + 1.5px)
+    );
+    -webkit-mask-size: var(--wave-w) 100%;
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-position: top center;
+
+    mask-image: radial-gradient(
+        circle at 50% calc(-1 * var(--wave-r)),
+        transparent var(--wave-r),
+        #000 calc(var(--wave-r) + 1.5px)
+    );
+    mask-size: var(--wave-w) 100%;
+    mask-repeat: repeat-x;
+    mask-position: top center;
+
+    // ── Hover: swap to terracotta ─────────────────────────────
+    &:hover {
+        background: $catalog-terracotta;
+    }
+
+    &:focus-visible {
+        outline: 2px solid $catalog-terracotta;
+        outline-offset: -4px;
+    }
+
+    // ── Plus icon via pseudo-element ──────────────────────────
+    &::before {
+        content: '+';
+        font-size: .95rem;
+        font-weight: 300;
+        line-height: 1;
+        opacity: .75;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  CARD BODY  (below the image)
+// ══════════════════════════════════════════════════════════════
+.catalog-card__body {
+    padding: $space-2 $space-2 $space-3;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    flex: 1;
+}
+
+// Eyebrow category label
+.catalog-card__category {
+    font-family: $font-catalog-body;
+    font-size: .65rem;
+    font-weight: 600;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: $catalog-terracotta;
+}
+
+// Serif product title
+.catalog-card__title {
+    font-family: $font-catalog-heading;
+    font-size: $font-size-lg;
+    font-weight: 400;   // elegant, not bold
+    color: $catalog-navy;
+    line-height: 1.25;
+    margin: 0;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+    }
+}
+
+// Footer row: price + wishlist
+.catalog-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: .5rem;
+}
+
+// Sans-serif price
+.catalog-card__price {
+    font-family: $font-catalog-body;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $catalog-navy;
+
+    del {
+        opacity: .4;
+        margin-right: .3rem;
+        font-weight: 400;
+    }
+
+    ins {
+        text-decoration: none;
+        color: $catalog-terracotta;
+    }
+}
+
+// Wishlist icon button
+.catalog-card__wishlist {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba($catalog-navy, .3);
+    padding: 0;
+    border-radius: 50%;
+    transition: color $transition-fast, background $transition-fast;
+
+    &:hover {
+        color: $catalog-terracotta;
+        background: rgba($catalog-terracotta, .1);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $catalog-terracotta;
+        outline-offset: 2px;
+    }
+
+    svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  OUT-OF-STOCK STATE
+// ══════════════════════════════════════════════════════════════
+.catalog-card--out-of-stock {
+    .catalog-card__img { opacity: .55; }
+    .catalog-card__add-btn { display: none; }
+
+    .catalog-card__badge-new {
+        background: rgba($catalog-navy, .35);
+    }
+}

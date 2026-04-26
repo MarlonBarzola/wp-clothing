@@ -1,9 +1,16 @@
 // ============================================================
-//  PAGES: SHOP
+//  PAGES: SHOP  — WooCommerce native-class overrides
+//  These rules target elements WooCommerce renders via hooks
+//  (breadcrumb, toolbar, pagination, widgets, sale flash).
+//  The catalog layout shell + product cards live in:
+//    pages/_catalog.scss   &   components/_catalog-card.scss
 // ============================================================
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins'    as *;
 
+// ══════════════════════════════════════════════════════════════
+//  LEGACY .wpc-shop-* classes kept for backwards-compat
+// ══════════════════════════════════════════════════════════════
 .wpc-shop-layout {
     @include container;
     display: grid;
@@ -16,14 +23,12 @@
 
 .wpc-shop-sidebar {
     @include max-respond-to(lg) { display: none; }
-
     &.is-open { display: block; }
 
     &__widget {
         margin-bottom: $space-4;
         border-bottom: 1px solid $color-border;
         padding-bottom: $space-4;
-
         &:last-child { border-bottom: none; }
     }
 
@@ -37,22 +42,351 @@
     }
 }
 
-// Price filter (WooCommerce widget override)
-.widget_price_filter .price_slider_wrapper {
-    .ui-slider-range { background: $color-primary; }
-    .ui-slider-handle { background: $color-dark; border-color: $color-dark; }
+// ══════════════════════════════════════════════════════════════
+//  WOOCOMMERCE-LAYOUT.CSS NEUTRALISER
+//  woocommerce-layout.css ships a float-based grid that sets:
+//    - width: 22.05% on li.product
+//    - float: left; margin: 0 3.8% 2.992em 0
+//    - ::before / ::after clearfix on ul.products
+//  All of these break our CSS grid. Override them here.
+// ══════════════════════════════════════════════════════════════
+
+// 1. Kill the float width so grid items size themselves
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
+    width: auto !important;
+    float: none !important;
+    margin: 0 !important;       // grid gap handles spacing
+    padding: 0 !important;
+    clear: none !important;
 }
 
-// Shop toolbar (results count + ordering)
-.woocommerce-result-count,
-.woocommerce-ordering select {
+// 2. Remove the clearfix pseudo-elements that break the first grid cell
+//    (they inject an empty table-cell as the first child of the flex/grid container)
+.woocommerce ul.products::before,
+.woocommerce ul.products::after,
+.woocommerce .products ul::before,
+.woocommerce .products ul::after {
+    content: none !important;   // removes the injected whitespace node
+    display: none !important;
+}
+
+// 3. Ensure the <ul> itself is a proper grid (not floats)
+.woocommerce ul.products,
+.woocommerce-page ul.products {
+    display: grid !important;
+    float: none !important;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  BREADCRUMB
+// ══════════════════════════════════════════════════════════════
+.woocommerce-breadcrumb {
+    font-family: $font-body;
+    font-size: $font-size-xs !important;
+    color: rgba($catalog-navy, .45);
+    margin-bottom: $space-3;
+
+    a {
+        color: rgba($catalog-navy, .45);
+        text-decoration: none;
+
+        &:hover { color: $catalog-terracotta; }
+    }
+
+    // Separator
+    .separator { margin-inline: .4rem; }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  TOOLBAR  (result-count + ordering)
+//  These are rendered by WC hooks inside .catalog-grid__toolbar
+// ══════════════════════════════════════════════════════════════
+.woocommerce-result-count {
+    font-family: $font-catalog-body;
     font-size: $font-size-sm;
-    color: $color-text;
+    color: rgba($catalog-navy, .45);
+    margin: 0;
 }
 
-.woocommerce-ordering select {
-    border: 1px solid $color-border;
-    border-radius: $radius-sm;
-    padding: .4rem .75rem;
-    &:focus { @include focus-ring; }
+.woocommerce-ordering {
+    select {
+        font-family: $font-catalog-body;
+        font-size: $font-size-sm;
+        color: $catalog-navy;
+        border: 1px solid $catalog-divider;
+        border-radius: $radius-sm;
+        background: $color-white;
+        padding: .35rem 2rem .35rem .75rem;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231B2B4B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right .65rem center;
+        cursor: pointer;
+
+        &:focus { outline: 2px solid $catalog-terracotta; outline-offset: 2px; }
+    }
 }
+
+// ══════════════════════════════════════════════════════════════
+//  PRODUCT GRID — columns override (3 cols in catalog context)
+// ══════════════════════════════════════════════════════════════
+.catalog-grid__products {
+    // Already 3-col via _catalog.scss; override WC default column logic
+    &.columns-3,
+    &.columns-4 {
+        grid-template-columns: repeat(3, 1fr);
+
+        @include max-respond-to(xl) { grid-template-columns: repeat(2, 1fr); }
+        @include max-respond-to(sm) { grid-template-columns: 1fr; }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SALE FLASH  — WooCommerce injects .onsale inside product li
+// ══════════════════════════════════════════════════════════════
+.catalog-card .onsale {
+    position: absolute;
+    top: $space-2;
+    left: $space-2;
+    z-index: 4;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: $catalog-navy;
+    color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-catalog-body;
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  WOOCOMMERCE NOTICES  (alerts rendered above the loop)
+// ══════════════════════════════════════════════════════════════
+.woocommerce-notices-wrapper,
+.woocommerce-info,
+.woocommerce-error,
+.woocommerce-message {
+    font-family: $font-catalog-body;
+    font-size: $font-size-sm;
+    border-radius: $radius-sm;
+    margin-bottom: $space-3;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  PAGINATION  —  WooCommerce generates .woocommerce-pagination
+// ══════════════════════════════════════════════════════════════
+.woocommerce-pagination {
+    margin-top: $space-6;
+
+    ul {
+        display: flex;
+        justify-content: center;
+        gap: .4rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        span,
+        a {
+            font-family: $font-catalog-body;
+            font-size: $font-size-sm;
+            font-weight: 500;
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1.5px solid transparent;
+            text-decoration: none;
+            color: $catalog-navy;
+            transition: border-color $transition-fast, color $transition-fast, background $transition-fast;
+        }
+
+        a:hover {
+            border-color: $catalog-terracotta;
+            color: $catalog-terracotta;
+        }
+
+        span.current {
+            background: $catalog-navy;
+            color: $color-white;
+        }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SIDEBAR WIDGETS  — generic wrapper registered in functions.php
+// ══════════════════════════════════════════════════════════════
+.catalog-sidebar {
+
+    // Widget wrapper set in register_sidebar()
+    .wpc-widget {
+        border-bottom: 1px solid $catalog-divider;
+        padding-bottom: $space-3;
+        margin-bottom: $space-3;
+
+        &:last-child { border-bottom: none; }
+    }
+
+    .wpc-widget__title {
+        font-family: $font-catalog-body;
+        font-size: $font-size-xs;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: $catalog-navy;
+        margin: 0 0 $space-2;
+        padding: $space-2 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        // Chevron using ::after (mirrors catalog-filter__toggle)
+        &::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-right: 1.5px solid currentColor;
+            border-bottom: 1.5px solid currentColor;
+            transform: rotate(45deg) translateY(-2px);
+            flex-shrink: 0;
+        }
+    }
+
+    // WooCommerce layered nav checkboxes
+    .woocommerce-widget-layered-nav-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        &__item {
+            a {
+                display: flex;
+                align-items: center;
+                gap: .65rem;
+                font-family: $font-catalog-body;
+                font-size: $font-size-sm;
+                color: rgba($catalog-navy, .75);
+                text-decoration: none;
+                transition: color $transition-fast;
+
+                &::before {
+                    content: '';
+                    width: 15px;
+                    height: 15px;
+                    border: 1.5px solid rgba($catalog-navy, .3);
+                    border-radius: 3px;
+                    flex-shrink: 0;
+                    transition: background $transition-fast, border-color $transition-fast;
+                }
+
+                &:hover { color: $catalog-navy; }
+            }
+
+            &--chosen a {
+                color: $catalog-terracotta;
+                font-weight: 600;
+
+                &::before {
+                    background: $catalog-terracotta;
+                    border-color: $catalog-terracotta;
+                    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%23ffffff' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 9px;
+                }
+            }
+        }
+
+        // Product count badge
+        .count {
+            margin-left: auto;
+            font-size: .68rem;
+            color: rgba($catalog-navy, .35);
+        }
+    }
+
+    // Price range slider
+    .widget_price_filter {
+        .price_slider_wrapper { padding-top: $space-1; }
+
+        .ui-slider {
+            background: $catalog-divider;
+            border: none;
+            height: 3px;
+            border-radius: 3px;
+            margin-block: $space-2;
+
+            .ui-slider-range { background: $catalog-terracotta; }
+            .ui-slider-handle {
+                background: $catalog-navy;
+                border: none;
+                border-radius: 50%;
+                width: 14px;
+                height: 14px;
+                top: -6px;
+                cursor: pointer;
+                outline: none;
+
+                &:focus-visible {
+                    box-shadow: 0 0 0 3px rgba($catalog-terracotta, .4);
+                }
+            }
+        }
+
+        .price_slider_amount {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: $space-2;
+
+            .price_label {
+                font-family: $font-catalog-body;
+                font-size: $font-size-xs;
+                color: rgba($catalog-navy, .55);
+            }
+
+            button {
+                font-family: $font-catalog-body;
+                font-size: $font-size-xs;
+                font-weight: 700;
+                letter-spacing: .07em;
+                text-transform: uppercase;
+                background: $catalog-navy;
+                color: $color-white;
+                border: none;
+                border-radius: $radius-sm;
+                padding: .45rem .9rem;
+                cursor: pointer;
+                transition: background $transition-fast;
+
+                &:hover { background: $catalog-terracotta; }
+            }
+        }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  INNER WPC WRAPPER  (emitted by wpc_woo_wrapper_start hook)
+// ══════════════════════════════════════════════════════════════
+.catalog-grid .wpc-woo-content {
+    // Transparent pass-through — layout is already handled by .catalog-grid
+    display: contents;
+}
+

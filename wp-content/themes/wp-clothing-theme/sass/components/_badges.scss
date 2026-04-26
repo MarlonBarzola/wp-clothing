@@ -1,5 +1,57 @@
 // ============================================================
 //  COMPONENTS: BADGES
-//  .wpc-badge (Sale / Nuevo) → components/_product-card.scss
+//  .wpc-badge      — generic inline badge (Sale / Nuevo)
+//  .catalog-badge  — circular floating badge (catalog cards)
 // ============================================================
 @use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+// ══════════════════════════════════════════════════════════════
+//  CATALOG CIRCULAR BADGE  — floating "Nuevo" indicator
+//  Used as .catalog-card__badge-new (see _catalog-card.scss)
+//  Standalone variant for direct use outside card context.
+// ══════════════════════════════════════════════════════════════
+.catalog-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    // Perfect circle
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+
+    // Flat color plane — no shadow
+    background: $catalog-terracotta;
+    color: $color-white;
+
+    font-family: $font-catalog-body;
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    line-height: 1.1;
+
+    // Modifiers
+    &--navy {
+        background: $catalog-navy;
+    }
+
+    &--cream {
+        background: $catalog-cream;
+        color: $catalog-navy;
+    }
+
+    &--sm {
+        width: 36px;
+        height: 36px;
+        font-size: .55rem;
+    }
+
+    &--lg {
+        width: 56px;
+        height: 56px;
+        font-size: .65rem;
+    }
+}

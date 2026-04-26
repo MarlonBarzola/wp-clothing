@@ -79,3 +79,16 @@ $z-sticky:    200;
 $z-overlay:   300;
 $z-modal:     400;
 $z-toast:     500;
+
+// ── Catalog: Baby store luxury palette ───────────────────────
+$catalog-cream:       #F8F3ED;   // Warm cream — page background
+$catalog-terracotta:  #C97B5F;   // Soft terracotta — accents & badges
+$catalog-navy:        #1B2B4B;   // Deep navy — primary text & CTA
+$catalog-card-bg:     #f9f9f9;   // Product card background (no border)
+$catalog-divider:     #EDE8E1;   // Subtle separator lines
+
+// ── Catalog typography ───────────────────────────────────────
+// Google Fonts: add to wp_enqueue_scripts in functions.php
+//   Cormorant Garamond:400,400i,600  |  DM Sans:400,500,600
+$font-catalog-heading: 'Cormorant Garamond', 'Georgia', serif;
+$font-catalog-body:    'DM Sans', 'Helvetica Neue', Arial, sans-serif;

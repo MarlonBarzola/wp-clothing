@@ -1,0 +1,220 @@
+// ============================================================
+//  PAGES: CATALOG  — Baby clothing store
+//  Palette: Cream · Soft Terracotta · Deep Navy
+//  Layout:  2-col grid → Sidebar 25% + Product grid 75%
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+// ══════════════════════════════════════════════════════════════
+//  PAGE SHELL
+// ══════════════════════════════════════════════════════════════
+.catalog-page {
+    min-height: 80vh;
+
+    &__inner {
+        @include container;
+        padding-block: $space-6;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  PAGE HEADER  (title + product count)
+// ══════════════════════════════════════════════════════════════
+.catalog-page__header {
+    margin-bottom: $space-5;
+    padding-bottom: $space-3;
+    border-bottom: 1px solid $catalog-divider;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: $space-2;
+}
+
+.catalog-page__title {
+    font-size: $font-size-3xl;
+    font-weight: 400;
+    color: $catalog-navy;
+    letter-spacing: -.01em;
+    line-height: 1.15;
+    margin: 0;
+
+    // Eyebrow label above the title
+    span {
+        display: block;
+        font-family: $font-catalog-body;
+        font-size: $font-size-xs;
+        font-weight: 600;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: $catalog-terracotta;
+        margin-bottom: .3rem;
+    }
+}
+
+.catalog-page__meta {
+    font-family: $font-catalog-body;
+    font-size: $font-size-sm;
+    color: rgba($catalog-navy, .5);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  TWO-COLUMN LAYOUT  (Sidebar 25% + Grid 75%)
+// ══════════════════════════════════════════════════════════════
+.catalog-layout {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    gap: $space-5;
+    align-items: start;
+
+    @include max-respond-to(lg) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SIDEBAR  (sticky, contains accordion filters)
+// ══════════════════════════════════════════════════════════════
+.catalog-sidebar {
+    position: sticky;
+    top: $space-4;
+
+    @include max-respond-to(lg) {
+        position: static;
+        display: none;
+
+        &.is-open { display: block; }
+    }
+
+    // Mobile toggle button (hidden on desktop)
+    &__mobile-toggle {
+        display: none;
+        align-items: center;
+        gap: .5rem;
+        background: none;
+        border: 1.5px solid $catalog-divider;
+        border-radius: $radius-sm;
+        padding: .55rem 1rem;
+        font-family: $font-catalog-body;
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: $catalog-navy;
+        cursor: pointer;
+        margin-bottom: $space-3;
+        transition: border-color $transition-fast;
+
+        &:hover { border-color: $catalog-terracotta; }
+
+        svg { width: 16px; height: 16px; }
+
+        @include max-respond-to(lg) { display: inline-flex; }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  PRODUCT GRID  (3 columns + toolbar)
+// ══════════════════════════════════════════════════════════════
+.catalog-grid {
+    // ── Toolbar: count + sort ─────────────────────────────────
+    &__toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: $space-3;
+        padding-bottom: $space-2;
+        border-bottom: 1px solid $catalog-divider;
+    }
+
+    &__count {
+        font-family: $font-catalog-body;
+        font-size: $font-size-sm;
+        color: rgba($catalog-navy, .5);
+    }
+
+    &__sort {
+        font-family: $font-catalog-body;
+        font-size: $font-size-sm;
+        color: $catalog-navy;
+        border: 1px solid $catalog-divider;
+        border-radius: $radius-sm;
+        padding: .35rem .75rem;
+        background: $color-white;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231B2B4B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right .6rem center;
+        padding-right: 2rem;
+
+        &:focus {
+            outline: 2px solid $catalog-terracotta;
+            outline-offset: 2px;
+        }
+    }
+
+    // ── Product grid: 3 columns ───────────────────────────────
+    &__products {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: $space-3;
+
+        @include max-respond-to(xl) { grid-template-columns: repeat(2, 1fr); }
+        @include max-respond-to(sm) { grid-template-columns: 1fr; }
+    }
+
+    // ── Empty state ───────────────────────────────────────────
+    &__empty {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding-block: $space-8;
+        font-family: $font-catalog-body;
+        color: rgba($catalog-navy, .45);
+
+        strong {
+            display: block;
+            font-family: $font-catalog-heading;
+            font-size: $font-size-xl;
+            font-weight: 400;
+            color: $catalog-navy;
+            margin-bottom: $space-1;
+        }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  PAGINATION
+// ══════════════════════════════════════════════════════════════
+.catalog-pagination {
+    margin-top: $space-6;
+    display: flex;
+    justify-content: center;
+    gap: .4rem;
+
+    a,
+    span {
+        font-family: $font-catalog-body;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        width: 38px;
+        height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1.5px solid transparent;
+        text-decoration: none;
+        color: $catalog-navy;
+        transition: background $transition-fast, border-color $transition-fast;
+
+        &:hover {
+            border-color: $catalog-terracotta;
+            color: $catalog-terracotta;
+        }
+
+        &.current {
+            background: $catalog-navy;
+            color: $color-white;
+        }
+    }
+}

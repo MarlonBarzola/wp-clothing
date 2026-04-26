@@ -1,0 +1,300 @@
+// ============================================================
+//  COMPONENTS: CATALOG FILTERS  — Accordion sidebar
+//  BEM: .catalog-filter  (group) → __toggle · __body · __list
+//       Variants: checkbox list · color swatches · size tags
+// ============================================================
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins'    as *;
+
+// ══════════════════════════════════════════════════════════════
+//  FILTER GROUP  (accordion item)
+// ══════════════════════════════════════════════════════════════
+.catalog-filter {
+    border-bottom: 1px solid $catalog-divider;
+
+    &:first-of-type {
+        border-top: 1px solid $catalog-divider;
+    }
+
+    // ── Accordion toggle header ───────────────────────────────
+    &__toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: none;
+        border: none;
+        padding: $space-2 0;
+        cursor: pointer;
+        font-family: $font-catalog-body;
+        font-size: $font-size-sm;
+        font-weight: 600;
+        letter-spacing: .09em;
+        text-transform: uppercase;
+        color: $catalog-navy;
+        transition: color $transition-fast;
+
+        &:hover { color: $catalog-terracotta; }
+
+        &:focus-visible {
+            outline: 2px solid $catalog-terracotta;
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        // Animated chevron icon (pure CSS, no SVG dependency)
+        &::after {
+            content: '';
+            width: 9px;
+            height: 9px;
+            border-right: 1.5px solid currentColor;
+            border-bottom: 1.5px solid currentColor;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform $transition-base;
+            flex-shrink: 0;
+        }
+
+        &[aria-expanded='true']::after {
+            transform: rotate(-135deg) translateY(-2px);
+        }
+    }
+
+    // ── Collapsible body ─────────────────────────────────────
+    &__body {
+        overflow: hidden;
+        max-height: 0;
+        padding-bottom: 0;
+        transition:
+            max-height .38s cubic-bezier(.4, 0, .2, 1),
+            padding-bottom .28s ease;
+
+        &.is-open {
+            max-height: 480px; // generous ceiling for any filter list
+            padding-bottom: $space-3;
+        }
+    }
+
+    // ── Checkbox / text option list ───────────────────────────
+    &__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    &__item {
+        label {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            cursor: pointer;
+            font-family: $font-catalog-body;
+            font-size: $font-size-sm;
+            color: rgba($catalog-navy, .8);
+            transition: color $transition-fast;
+
+            &:hover { color: $catalog-navy; }
+        }
+
+        // Count pill
+        &-count {
+            margin-left: auto;
+            font-size: .68rem;
+            color: rgba($catalog-navy, .4);
+        }
+    }
+
+    // ── Custom checkbox ───────────────────────────────────────
+    &__checkbox {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 1.5px solid rgba($catalog-navy, .3);
+        border-radius: 3px;
+        flex-shrink: 0;
+        cursor: pointer;
+        transition:
+            background $transition-fast,
+            border-color $transition-fast;
+
+        &:checked {
+            background: $catalog-terracotta;
+            border-color: $catalog-terracotta;
+            // SVG checkmark embedded — no external asset
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%23ffffff' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 10px;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $catalog-terracotta;
+            outline-offset: 2px;
+        }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  COLOR SWATCH VARIANT
+// ══════════════════════════════════════════════════════════════
+.catalog-filter__swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.catalog-filter__swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition:
+        border-color $transition-fast,
+        transform $transition-fast,
+        box-shadow $transition-fast;
+    position: relative;
+
+    // Inner ring appears on active/hover
+    &::after {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 1.5px solid transparent;
+        transition: border-color $transition-fast;
+    }
+
+    &:hover::after,
+    &.is-active::after {
+        border-color: $catalog-navy;
+    }
+
+    &.is-active {
+        transform: scale(1.12);
+    }
+
+    // Accessibility: keyboard focus
+    &:focus-visible {
+        outline: 2px solid $catalog-terracotta;
+        outline-offset: 3px;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SIZE TAG VARIANT
+// ══════════════════════════════════════════════════════════════
+.catalog-filter__sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+}
+
+.catalog-filter__size-tag {
+    min-width: 40px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 .6rem;
+    border: 1.5px solid $catalog-divider;
+    border-radius: $radius-sm;
+    background: transparent;
+    font-family: $font-catalog-body;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: $catalog-navy;
+    cursor: pointer;
+    transition:
+        border-color $transition-fast,
+        background $transition-fast,
+        color $transition-fast;
+
+    &:hover,
+    &.is-active {
+        border-color: $catalog-terracotta;
+        background: rgba($catalog-terracotta, .08);
+        color: $catalog-terracotta;
+    }
+
+    &:focus-visible {
+        outline: 2px solid $catalog-terracotta;
+        outline-offset: 2px;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  PRICE RANGE VARIANT
+// ══════════════════════════════════════════════════════════════
+.catalog-filter-price {
+    &__track {
+        padding-top: $space-1;
+    }
+
+    &__range {
+        width: 100%;
+        accent-color: $catalog-terracotta;
+        cursor: pointer;
+    }
+
+    &__labels {
+        display: flex;
+        justify-content: space-between;
+        font-family: $font-catalog-body;
+        font-size: $font-size-xs;
+        color: rgba($catalog-navy, .5);
+        margin-top: .4rem;
+    }
+
+    &__value {
+        font-weight: 600;
+        color: $catalog-navy;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  APPLY / CLEAR ACTIONS
+// ══════════════════════════════════════════════════════════════
+.catalog-filter__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: $space-4;
+    padding-top: $space-3;
+    border-top: 1px solid $catalog-divider;
+}
+
+.catalog-filter__apply {
+    font-family: $font-catalog-body;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    background: $catalog-navy;
+    color: $color-white;
+    border: none;
+    border-radius: $radius-sm;
+    padding: .6rem 1.25rem;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover { background: $catalog-terracotta; }
+    &:focus-visible { outline: 2px solid $catalog-terracotta; outline-offset: 2px; }
+}
+
+.catalog-filter__clear {
+    font-family: $font-catalog-body;
+    font-size: $font-size-xs;
+    color: rgba($catalog-navy, .5);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    transition: color $transition-fast;
+
+    &:hover { color: $catalog-terracotta; }
+}
