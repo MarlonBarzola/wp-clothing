@@ -1108,7 +1108,7 @@ strong {
   background-color: #D9886A;
 }
 
-.wc-block-components-button:not(.is-link) {
+.wc-block-cart__submit-container .wc-block-components-button:not(.is-link) {
   color: #ffffff;
 }
 
@@ -2123,7 +2123,6 @@ strong {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.07em;
@@ -2149,7 +2148,6 @@ strong {
   border: none;
   cursor: pointer;
   text-decoration: none;
-  font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -2193,7 +2191,6 @@ strong {
 }
 
 .catalog-card__category {
-  font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.13em;
@@ -2202,7 +2199,6 @@ strong {
 }
 
 .catalog-card__title {
-  font-family: "Cormorant Garamond", "Georgia", serif;
   font-size: 1.125rem;
   font-weight: 400;
   color: #1B2B4B;
@@ -2227,7 +2223,6 @@ strong {
 }
 
 .catalog-card__price {
-  font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
   color: #1B2B4B;
@@ -3152,6 +3147,63 @@ strong {
   color: rgba(27, 43, 75, 0.7);
   line-height: 1.8;
   max-width: 680px;
+}
+
+.pdp-related {
+  width: 100%;
+  padding-block: 5rem 4rem;
+  border-top: 1px solid #EDE8E1;
+}
+.pdp-related__inner-wrap {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+}
+.pdp-related__header {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  margin-bottom: 3rem;
+}
+.pdp-related__title {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #1B2B4B;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0;
+}
+.pdp-related__title span {
+  display: block;
+  font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C97B5F;
+  margin-bottom: 0.3rem;
+}
+.pdp-related ul.products.catalog-grid__products {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  grid-template-columns: repeat(4, 1fr) !important;
+  margin: 0 auto !important;
+}
+@media (max-width: 1279px) {
+  .pdp-related ul.products.catalog-grid__products {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+@media (max-width: 767px) {
+  .pdp-related ul.products.catalog-grid__products {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 479px) {
+  .pdp-related ul.products.catalog-grid__products {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 .woocommerce-cart .wpc-woo-content,

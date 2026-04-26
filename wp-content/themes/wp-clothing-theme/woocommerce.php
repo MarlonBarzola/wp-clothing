@@ -19,6 +19,11 @@ defined( 'ABSPATH' ) || exit;
 // ── Route: single product ─────────────────────────────────────────────────────
 if ( is_singular( 'product' ) ) {
     get_header();
+
+    // Remove related products from the hook — we render them manually
+    // below the product container so they sit OUTSIDE the 2-col grid.
+    remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
     ?>
     <div class="pdp-page">
         <div class="pdp-page__inner">
@@ -30,6 +35,28 @@ if ( is_singular( 'product' ) ) {
             ?>
         </div>
     </div>
+
+    <?php
+    // ── Related products — full-width section below the product ──────────────
+    // Gather the same args WooCommerce would use internally.
+    global $product;
+    if ( is_a( $product, 'WC_Product' ) ) {
+        $related_ids = wc_get_related_products( $product->get_id(), apply_filters( 'woocommerce_related_products_limit', 4 ) );
+        if ( ! empty( $related_ids ) ) {
+            $related_products = array_filter(
+                array_map( 'wc_get_product', $related_ids ),
+                fn( $p ) => $p && $p->is_visible()
+            );
+            if ( ! empty( $related_products ) ) {
+                wc_get_template(
+                    'single-product/related.php',
+                    [ 'related_products' => $related_products ]
+                );
+            }
+        }
+    }
+    ?>
+
     <?php
     get_footer();
     return; // stop — do not fall through to the catalog layout

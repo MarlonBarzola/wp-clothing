@@ -750,3 +750,56 @@
         max-width: 680px;
     }
 }
+
+// ══════════════════════════════════════════════════════════════
+//  RELATED PRODUCTS SECTION  (.pdp-related)
+//  Rendered OUTSIDE the 2-col product grid (woocommerce.php),
+//  so it is a full-width block at page level.
+// ══════════════════════════════════════════════════════════════
+.pdp-related {
+    width: 100%;
+    padding-block: $space-7 $space-6;
+    border-top: 1px solid $catalog-divider;
+
+    // Inner wrapper keeps content within container max-width
+    &__inner-wrap {
+        @include container;
+    }
+
+    // ── Section header ────────────────────────────────────────
+    &__header {
+        @include container;
+        margin-bottom: $space-5;
+    }
+
+    &__title {
+        font-size: $font-size-2xl;
+        font-weight: 400;
+        color: $catalog-navy;
+        letter-spacing: -.01em;
+        line-height: 1.15;
+        margin: 0;
+
+        span {
+            display: block;
+            font-family: $font-catalog-body;
+            font-size: $font-size-xs;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: $catalog-terracotta;
+            margin-bottom: .3rem;
+        }
+    }
+
+    // ── Product grid ─────────────────────────────────────────
+    ul.products.catalog-grid__products {
+        @include container;
+        grid-template-columns: repeat(4, 1fr) !important;
+
+        @include max-respond-to(xl) { grid-template-columns: repeat(3, 1fr) !important; }
+        @include max-respond-to(md) { grid-template-columns: repeat(2, 1fr) !important; }
+        @include max-respond-to(xs) { grid-template-columns: 1fr !important; }
+        margin: 0 auto !important;
+    }
+}

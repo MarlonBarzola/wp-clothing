@@ -82,7 +82,6 @@
     justify-content: center;
     text-align: center;
 
-    font-family: $font-catalog-body;
     font-size: .58rem;
     font-weight: 700;
     letter-spacing: .07em;
@@ -136,7 +135,6 @@
     text-decoration: none;
 
     // ── Typography ────────────────────────────────────────────
-    font-family: $font-catalog-body;
     font-size: $font-size-xs;
     font-weight: 700;
     letter-spacing: .12em;
@@ -210,7 +208,6 @@
 
 // Eyebrow category label
 .catalog-card__category {
-    font-family: $font-catalog-body;
     font-size: .65rem;
     font-weight: 600;
     letter-spacing: .13em;
@@ -220,7 +217,6 @@
 
 // Serif product title
 .catalog-card__title {
-    font-family: $font-catalog-heading;
     font-size: $font-size-lg;
     font-weight: 400;   // elegant, not bold
     color: $catalog-navy;
@@ -249,7 +245,6 @@
 
 // Sans-serif price
 .catalog-card__price {
-    font-family: $font-catalog-body;
     font-size: $font-size-sm;
     font-weight: 600;
     color: $catalog-navy;
