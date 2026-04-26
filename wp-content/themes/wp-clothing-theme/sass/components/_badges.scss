@@ -1,20 +1,5 @@
 // ============================================================
-//  COMPONENTS: BADGES (New / Sale / Featured)
+//  COMPONENTS: BADGES
+//  .wpc-badge (Sale / Nuevo) → components/_product-card.scss
 // ============================================================
 @use '../abstracts/variables' as *;
-
-.badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: $radius-pill;
-    font-size: $font-size-xs;
-    font-weight: 700;
-    line-height: 1.6;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-
-    &--sale    { background: $color-sale; color: $color-white; }
-    &--new     { background: $color-new;  color: $color-white; }
-    &--hot     { background: $color-primary; color: $color-dark; }
-    &--feature { background: $color-dark; color: $color-white; }
-}

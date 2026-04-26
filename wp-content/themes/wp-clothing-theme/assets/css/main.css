@@ -113,15 +113,6 @@ strong {
   font-weight: 700;
 }
 
-.eyebrow {
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #d97a7a;
-}
-
 :root {
   --clr-primary: #f4a5a5;
   --clr-primary-dark: #d97a7a;
@@ -197,59 +188,6 @@ strong {
 }
 .section--bg-dark h2, .section--bg-dark h3 {
   color: #ffffff;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-.section-header--left {
-  text-align: left;
-}
-.section-header__eyebrow {
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #d97a7a;
-  margin-bottom: 0.5rem;
-}
-.section-header__title {
-  margin-bottom: 1rem;
-}
-.section-header__subtitle {
-  max-width: 560px;
-  margin-inline: auto;
-  color: #555555;
-  font-size: 1.125rem;
-}
-.section-header--left .section-header__subtitle {
-  margin-inline: 0;
-}
-
-.grid-auto {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1.5rem;
-}
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
 }
 
 .wpc-topbar {
@@ -972,43 +910,6 @@ strong {
   font-size: 1rem;
 }
 
-.card {
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  transition: box-shadow 250ms ease, transform 250ms ease;
-}
-.card:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
-  transform: translateY(-3px);
-}
-.card__media {
-  overflow: hidden;
-}
-.card__media img {
-  width: 100%;
-  object-fit: cover;
-  transition: transform 400ms ease;
-}
-.card:hover .card__media img {
-  transform: scale(1.04);
-}
-.card__body {
-  padding: 1.5rem;
-}
-.card__title {
-  margin-bottom: 0.5rem;
-}
-.card__text {
-  font-size: 0.875rem;
-  color: #555555;
-}
-.card__footer {
-  padding: 1rem 1.5rem;
-  border-top: 1px solid #e8e8e8;
-}
-
 .wpc-hero {
   position: relative;
   width: 100%;
@@ -1247,553 +1148,6 @@ strong {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
   transform: translateY(-4px);
 }
-.woocommerce ul.products li.product:hover .wpc-product-card__actions {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.wpc-product-card__image-wrap {
-  aspect-ratio: 0.75;
-  overflow: hidden;
-  overflow: hidden;
-  background: #f9e4d4;
-}
-.wpc-product-card__image-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 400ms ease;
-}
-.wpc-product-card__image-wrap:hover img {
-  transform: scale(1.06);
-}
-.wpc-product-card__badges {
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  z-index: 2;
-}
-.wpc-product-card__body {
-  padding: 1rem;
-}
-.wpc-product-card__title {
-  font-size: 0.875rem;
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
-  font-weight: 600;
-  color: #2d2d2d;
-  margin-bottom: 0.25rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.wpc-product-card__price {
-  font-size: 0.875rem;
-  color: #555555;
-}
-.wpc-product-card__price del {
-  color: #a2a2a2;
-  margin-right: 0.25rem;
-}
-.wpc-product-card__price ins {
-  text-decoration: none;
-  color: #e74c3c;
-  font-weight: 700;
-}
-.wpc-product-card__actions {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  right: 1rem;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 250ms ease, transform 250ms ease;
-}
-.wpc-product-card__actions .button {
-  width: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1.25rem;
-  border-radius: 999px;
-  background: #2d2d2d;
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  border: 2px solid #2d2d2d;
-  transition: background 250ms ease, transform 150ms ease;
-  cursor: pointer;
-}
-.wpc-product-card__actions .button:hover {
-  background: #d97a7a;
-  border-color: #d97a7a;
-  transform: translateY(-2px);
-}
-
-.woocommerce span.onsale {
-  background: #e74c3c;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  min-height: auto;
-  min-width: auto;
-  padding: 3px 10px;
-  line-height: 1.6;
-}
-
-.wpc-banners {
-  width: 100%;
-  max-width: 1320px;
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
-@media (max-width: 767px) {
-  .wpc-banners {
-    grid-template-columns: 1fr;
-  }
-}
-
-.wpc-banner {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  min-height: 420px;
-  cursor: pointer;
-}
-.wpc-banner__bg {
-  position: absolute;
-  inset: 0;
-}
-.wpc-banner__bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 400ms ease;
-}
-.wpc-banner:hover .wpc-banner__bg img {
-  transform: scale(1.05);
-}
-.wpc-banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(45, 45, 45, 0.65) 0%, transparent 60%);
-  z-index: 1;
-}
-.wpc-banner__content {
-  position: relative;
-  z-index: 2;
-  padding: 2rem;
-  color: #ffffff;
-}
-.wpc-banner__subtitle {
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  opacity: 0.85;
-}
-.wpc-banner__title {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 2rem;
-  color: #ffffff;
-  margin-bottom: 1rem;
-}
-.wpc-banner__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.05em;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-  padding-bottom: 2px;
-  transition: gap 150ms ease, border-color 150ms ease;
-}
-.wpc-banner__cta:hover {
-  gap: 0.75rem;
-  border-color: #ffffff;
-}
-.wpc-banner__cta::after {
-  content: "→";
-}
-
-.wpc-features {
-  width: 100%;
-  max-width: 1320px;
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  text-align: center;
-}
-@media (max-width: 767px) {
-  .wpc-features {
-    grid-template-columns: 1fr;
-  }
-}
-
-.wpc-feature__icon {
-  width: 48px;
-  height: 48px;
-  margin: 0 auto 1rem;
-}
-.wpc-feature__icon img, .wpc-feature__icon svg {
-  width: 100%;
-  height: 100%;
-}
-.wpc-feature__title {
-  font-size: 1.125rem;
-  margin-bottom: 0.5rem;
-}
-.wpc-feature__text {
-  font-size: 0.875rem;
-  color: #555555;
-}
-
-.wpc-icon-bar {
-  background: #fafafa;
-  border-top: 1px solid #e8e8e8;
-  border-bottom: 1px solid #e8e8e8;
-  padding: 2rem 1.5rem;
-}
-.wpc-icon-bar__inner {
-  width: 100%;
-  max-width: 1320px;
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  text-align: center;
-}
-@media (max-width: 767px) {
-  .wpc-icon-bar__inner {
-    grid-template-columns: 1fr;
-  }
-}
-.wpc-icon-bar__item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-.wpc-icon-bar__icon {
-  font-size: 1.75rem;
-  color: #d97a7a;
-}
-.wpc-icon-bar__title {
-  font-weight: 700;
-  font-size: 0.875rem;
-  color: #2d2d2d;
-}
-.wpc-icon-bar__text {
-  font-size: 0.75rem;
-  color: #555555;
-}
-
-.wpc-newsletter {
-  background: #f9e4d4;
-  padding: 5rem 2rem;
-  text-align: center;
-}
-.wpc-newsletter__eyebrow {
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #d97a7a;
-  margin-bottom: 0.5rem;
-}
-.wpc-newsletter__title {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  margin-bottom: 0.5rem;
-}
-.wpc-newsletter__subtitle {
-  color: #555555;
-  margin-bottom: 2rem;
-}
-.wpc-newsletter__form {
-  display: flex;
-  max-width: 480px;
-  margin-inline: auto;
-  gap: 0;
-  border-radius: 999px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-.wpc-newsletter__input {
-  flex: 1;
-  padding: 0.875rem 1.5rem;
-  border: none;
-  background: #ffffff;
-  font-size: 0.875rem;
-  color: #2d2d2d;
-}
-.wpc-newsletter__input::placeholder {
-  color: #888888;
-}
-.wpc-newsletter__input:focus {
-  outline: none;
-}
-.wpc-newsletter__submit {
-  padding: 0.875rem 1.75rem;
-  background: #2d2d2d;
-  color: #ffffff;
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: background 250ms ease;
-}
-.wpc-newsletter__submit:hover {
-  background: #d97a7a;
-}
-
-.badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 1.6;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.badge--sale {
-  background: #e74c3c;
-  color: #ffffff;
-}
-.badge--new {
-  background: #27ae60;
-  color: #ffffff;
-}
-.badge--hot {
-  background: #f4a5a5;
-  color: #2d2d2d;
-}
-.badge--feature {
-  background: #2d2d2d;
-  color: #ffffff;
-}
-
-.wpc-product-tabs {
-  padding-block: 4rem;
-}
-.wpc-product-tabs__header {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-@media (max-width: 767px) {
-  .wpc-product-tabs__header {
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-}
-.wpc-product-tabs__title {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2d2d2d;
-  white-space: nowrap;
-  margin: 0;
-  flex-shrink: 0;
-}
-@media (max-width: 767px) {
-  .wpc-product-tabs__title {
-    font-size: 1.125rem;
-    width: 100%;
-  }
-}
-.wpc-product-tabs__nav {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex: 1;
-  justify-content: center;
-}
-@media (max-width: 767px) {
-  .wpc-product-tabs__nav {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
-}
-.wpc-product-tabs__tab {
-  position: relative;
-  background: none;
-  border: none;
-  padding: 0.35rem 0.85rem;
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #555555;
-  cursor: pointer;
-  letter-spacing: 0.02em;
-  border-radius: 999px;
-  transition: color 150ms ease, background 150ms ease;
-}
-.wpc-product-tabs__tab::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 60%;
-  height: 2px;
-  background: #d97a7a;
-  border-radius: 999px;
-  transition: transform 250ms ease;
-}
-.wpc-product-tabs__tab:hover {
-  color: #2d2d2d;
-}
-.wpc-product-tabs__tab.is-active {
-  color: #2d2d2d;
-  font-weight: 700;
-}
-.wpc-product-tabs__tab.is-active::after {
-  transform: translateX(-50%) scaleX(1);
-}
-.wpc-product-tabs__view-all {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  white-space: nowrap;
-  flex-shrink: 0;
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #555555;
-  text-decoration: none;
-  letter-spacing: 0.03em;
-  transition: color 150ms ease, gap 150ms ease;
-}
-.wpc-product-tabs__view-all svg {
-  transition: transform 150ms ease;
-}
-.wpc-product-tabs__view-all:hover {
-  color: #d97a7a;
-  gap: 0.5rem;
-}
-.wpc-product-tabs__view-all:hover svg {
-  transform: translateX(2px);
-}
-@media (max-width: 767px) {
-  .wpc-product-tabs__view-all {
-    margin-left: auto;
-  }
-}
-.wpc-product-tabs__panel {
-  display: none;
-}
-.wpc-product-tabs__panel.is-active {
-  display: block;
-}
-.wpc-product-tabs__empty {
-  text-align: center;
-  color: #555555;
-  font-size: 0.875rem;
-  padding-block: 2rem;
-}
-.wpc-product-tabs__carousel {
-  position: relative;
-}
-
-.wpc-tabs-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid #e8e8e8;
-  background: #ffffff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
-}
-.wpc-tabs-nav svg {
-  width: 16px;
-  height: 16px;
-  color: #2d2d2d;
-  transition: color 150ms ease;
-}
-.wpc-tabs-nav:hover {
-  background: #f4a5a5;
-  border-color: #f4a5a5;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-.wpc-tabs-nav:hover svg {
-  color: #ffffff;
-}
-.wpc-tabs-nav--prev {
-  left: -18px;
-}
-.wpc-tabs-nav--next {
-  right: -18px;
-}
-@media (max-width: 767px) {
-  .wpc-tabs-nav {
-    display: none;
-  }
-}
-
-.wpc-tabs-nav {
-  position: absolute;
-  top: 35%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid #e8e8e8;
-  background: #ffffff;
-  color: #2d2d2d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 250ms ease, border-color 250ms ease, color 250ms ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  padding: 0;
-}
-.wpc-tabs-nav:hover {
-  background: #2d2d2d;
-  border-color: #2d2d2d;
-  color: #ffffff;
-}
-.wpc-tabs-nav.swiper-button-disabled {
-  opacity: 0.3;
-  pointer-events: none;
-}
-.wpc-tabs-nav--prev {
-  left: 0;
-}
-.wpc-tabs-nav--next {
-  right: 0;
-}
-.wpc-tabs-nav svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
 
 .wpc-product-card__image-wrap {
   display: block;
@@ -1899,87 +1253,326 @@ strong {
   color: #ffffff;
 }
 
-.wpc-community {
-  width: 100%;
-  max-width: 1320px;
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: center;
-}
-@media (max-width: 767px) {
-  .wpc-community {
-    grid-template-columns: 1fr;
-  }
-}
-.wpc-community__content__eyebrow {
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
+.woocommerce span.onsale {
+  background: #e74c3c;
+  border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #d97a7a;
-  margin-bottom: 1rem;
-}
-.wpc-community__content__title {
-  margin-bottom: 1.5rem;
-}
-.wpc-community__content__text {
-  margin-bottom: 2rem;
-  color: #555555;
-}
-.wpc-community__image {
-  border-radius: 16px;
-  overflow: hidden;
-}
-.wpc-community__image img {
-  width: 100%;
-  object-fit: cover;
+  min-height: auto;
+  min-width: auto;
+  padding: 3px 10px;
+  line-height: 1.6;
 }
 
-.wpc-brand-story {
-  background: #f9e4d4;
-  padding: 5rem 0;
+.wpc-product-tabs {
+  padding-block: 4rem;
 }
-.wpc-brand-story__inner {
+.wpc-product-tabs__header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 767px) {
+  .wpc-product-tabs__header {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+.wpc-product-tabs__title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  white-space: nowrap;
+  margin: 0;
+  flex-shrink: 0;
+}
+@media (max-width: 767px) {
+  .wpc-product-tabs__title {
+    font-size: 1.125rem;
+    width: 100%;
+  }
+}
+.wpc-product-tabs__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
+}
+@media (max-width: 767px) {
+  .wpc-product-tabs__nav {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+.wpc-product-tabs__tab {
+  position: relative;
+  background: none !important;
+  border: none;
+  padding: 0.35rem 0.85rem;
+  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #555555 !important;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  transition: color 150ms ease, background 150ms ease;
+}
+.wpc-product-tabs__tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 2px;
+  background: #d97a7a;
+  border-radius: 999px;
+  transition: transform 250ms ease;
+}
+.wpc-product-tabs__tab:hover {
+  color: #2d2d2d;
+}
+.wpc-product-tabs__tab:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+.wpc-product-tabs__tab.is-active {
+  color: #2d2d2d;
+  font-weight: 700;
+}
+.wpc-product-tabs__tab.is-active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+.wpc-product-tabs__view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #555555;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 150ms ease;
+}
+.wpc-product-tabs__view-all svg {
+  transition: transform 150ms ease;
+}
+.wpc-product-tabs__view-all:hover {
+  color: #d97a7a;
+}
+.wpc-product-tabs__view-all:hover svg {
+  transform: translateX(4px);
+}
+@media (max-width: 767px) {
+  .wpc-product-tabs__view-all {
+    margin-left: auto;
+  }
+}
+.wpc-product-tabs__panel {
+  display: none;
+}
+.wpc-product-tabs__panel.is-active {
+  display: block;
+}
+.wpc-product-tabs__empty {
+  text-align: center;
+  color: #555555;
+  font-size: 0.875rem;
+  padding-block: 2rem;
+}
+.wpc-product-tabs__carousel {
+  position: relative;
+}
+
+.wpc-tabs-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e8e8e8;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+.wpc-tabs-nav svg {
+  width: 16px;
+  height: 16px;
+  color: #2d2d2d;
+  transition: color 150ms ease;
+}
+.wpc-tabs-nav:hover {
+  background: #f4a5a5;
+  border-color: #f4a5a5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.wpc-tabs-nav:hover svg {
+  color: #ffffff;
+}
+.wpc-tabs-nav--prev {
+  left: -18px;
+}
+.wpc-tabs-nav--next {
+  right: -18px;
+}
+@media (max-width: 767px) {
+  .wpc-tabs-nav {
+    display: none;
+  }
+}
+
+.wpc-banners {
   width: 100%;
   max-width: 1320px;
   margin-inline: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 @media (max-width: 767px) {
-  .wpc-brand-story__inner {
+  .wpc-banners {
     grid-template-columns: 1fr;
-    text-align: center;
   }
 }
-.wpc-brand-story__image {
+
+.wpc-banner {
+  position: relative;
   border-radius: 16px;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  min-height: 420px;
+  cursor: pointer;
 }
-.wpc-brand-story__image img {
+.wpc-banner__bg {
+  position: absolute;
+  inset: 0;
+}
+.wpc-banner__bg img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
+  transition: transform 400ms ease;
 }
-.wpc-brand-story__content__eyebrow {
+.wpc-banner:hover .wpc-banner__bg img {
+  transform: scale(1.05);
+}
+.wpc-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(45, 45, 45, 0.65) 0%, transparent 60%);
+  z-index: 1;
+}
+.wpc-banner__content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  color: #ffffff;
+}
+.wpc-banner__subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  opacity: 0.85;
+}
+.wpc-banner__title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+.wpc-banner__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  padding-bottom: 2px;
+  transition: gap 150ms ease, border-color 150ms ease;
+}
+.wpc-banner__cta:hover {
+  gap: 0.75rem;
+  border-color: #ffffff;
+}
+.wpc-banner__cta::after {
+  content: "→";
+}
+
+.wpc-newsletter {
+  background: #f9e4d4;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+.wpc-newsletter__eyebrow {
   font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: #d97a7a;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
-.wpc-brand-story__content__title {
-  margin-bottom: 1.5rem;
+.wpc-newsletter__title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 0.5rem;
 }
-.wpc-brand-story__content__text {
+.wpc-newsletter__subtitle {
   color: #555555;
   margin-bottom: 2rem;
+}
+.wpc-newsletter__form {
+  display: flex;
+  max-width: 480px;
+  margin-inline: auto;
+  gap: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.wpc-newsletter__input {
+  flex: 1;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  background: #ffffff;
+  font-size: 0.875rem;
+  color: #2d2d2d;
+}
+.wpc-newsletter__input::placeholder {
+  color: #888888;
+}
+.wpc-newsletter__input:focus {
+  outline: none;
+}
+.wpc-newsletter__submit {
+  padding: 0.875rem 1.75rem;
+  background: #2d2d2d;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background 250ms ease;
+}
+.wpc-newsletter__submit:hover {
+  background: #d97a7a;
 }
 
 .wpc-shop-layout {

@@ -24,31 +24,4 @@
     }
 }
 
-// Section header (eyebrow + title + subtitle)
-.section-header {
-    text-align: center;
-    margin-bottom: $space-5;
 
-    &--left { text-align: left; }
-
-    &__eyebrow { @include eyebrow-styles; margin-bottom: $space-1; }
-
-    &__title {
-        margin-bottom: $space-2;
-    }
-
-    &__subtitle {
-        max-width: 560px;
-        margin-inline: auto;
-        color: $color-text;
-        font-size: $font-size-lg;
-    }
-
-    &--left &__subtitle { margin-inline: 0; }
-}
-
-// Auto grid
-.grid-auto  { @include auto-grid(240px); }
-.grid-2     { display: grid; grid-template-columns: repeat(2, 1fr); gap: $space-3; }
-.grid-3     { display: grid; grid-template-columns: repeat(3, 1fr); gap: $space-3; }
-.grid-4     { display: grid; grid-template-columns: repeat(4, 1fr); gap: $space-3; }

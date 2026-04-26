@@ -21,15 +21,12 @@
 
 // 4. Components (reusable UI blocks)
 @use 'components/buttons';
-@use 'components/cards';
 @use 'components/hero';
 @use 'components/category-grid';
 @use 'components/product-card';
-@use 'components/banner';
-@use 'components/testimonials';
-@use 'components/newsletter';
-@use 'components/badges';
 @use 'components/product-tabs';
+@use 'components/banner';
+@use 'components/newsletter';
 
 // 5. Pages (page-specific overrides)
 @use 'pages/home';

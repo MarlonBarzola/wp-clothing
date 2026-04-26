@@ -52,13 +52,13 @@
 
     &__tab {
         position: relative;
-        background: none;
+        background: none !important;
         border: none;
         padding: .35rem .85rem;
         font-family: $font-body;
         font-size: $font-size-sm;
         font-weight: 500;
-        color: $color-text;
+        color: $color-text !important;
         cursor: pointer;
         letter-spacing: .02em;
         border-radius: $radius-pill;
@@ -79,6 +79,10 @@
 
         &:hover {
             color: $color-dark;
+
+            &::after {
+                transform: translateX(-50%) scaleX(1);
+            }
         }
 
         &.is-active {
@@ -104,7 +108,7 @@
         color: $color-text;
         text-decoration: none;
         letter-spacing: .03em;
-        transition: color $transition-fast, gap $transition-fast;
+        transition: color $transition-fast;
 
         svg {
             transition: transform $transition-fast;
@@ -112,10 +116,9 @@
 
         &:hover {
             color: $color-primary-dark;
-            gap: .5rem;
 
             svg {
-                transform: translateX(2px);
+                transform: translateX(4px);
             }
         }
 
