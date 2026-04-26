@@ -244,6 +244,24 @@ function wpc_footer_customizer_register( WP_Customize_Manager $wp_customize ): v
     }
 }
 
+// -- YITH Wishlist: remove auto-injected button on single product page --------
+// The button is already placed manually in woocommerce/single-product/add-to-cart/simple.php
+// Removing the automatic hook prevents it from rendering twice.
+add_action( 'wp', function () {
+    if ( ! is_product() ) {
+        return;
+    }
+    $frontend = function_exists( 'YITH_WCWL_Frontend' )
+        ? YITH_WCWL_Frontend()
+        : ( isset( YITH_WCWL()->frontend ) ? YITH_WCWL()->frontend : null );
+
+    if ( $frontend ) {
+        remove_action( 'woocommerce_single_product_summary',   [ $frontend, 'print_button' ], 31 );
+        remove_action( 'woocommerce_before_single_product_summary', [ $frontend, 'print_button' ], 21 );
+        remove_action( 'woocommerce_after_single_product_summary',  [ $frontend, 'print_button' ], 11 );
+    }
+} );
+
 // -- WooCommerce: update cart count via AJAX (fragment) -----------------------
 add_filter( 'woocommerce_add_to_cart_fragments', 'wpc_cart_count_fragment' );
 function wpc_cart_count_fragment( array $fragments ): array {

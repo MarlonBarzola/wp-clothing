@@ -2775,7 +2775,6 @@ strong {
 }
 
 .woocommerce div.product .product_title {
-  font-family: "Cormorant Garamond", "Georgia", serif;
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 400;
   color: #1B2B4B;
@@ -3175,7 +3174,6 @@ strong {
 }
 .pdp-related__title span {
   display: block;
-  font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;

@@ -202,7 +202,6 @@
 
 // ── Product title ─────────────────────────────────────────────
 .woocommerce div.product .product_title {
-    font-family: $font-catalog-heading;
     font-size: clamp(1.75rem, 3vw, 2.5rem);
     font-weight: 400;
     color: $catalog-navy;
@@ -782,7 +781,6 @@
 
         span {
             display: block;
-            font-family: $font-catalog-body;
             font-size: $font-size-xs;
             font-weight: 700;
             letter-spacing: .14em;
