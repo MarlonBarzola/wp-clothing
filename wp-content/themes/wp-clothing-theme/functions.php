@@ -80,9 +80,12 @@ function wpc_theme_setup() {
 
     // Register nav menus
     register_nav_menus( [
-        'primary'   => __( 'Primary Menu', 'wp-clothing-theme' ),
-        'footer'    => __( 'Footer Menu', 'wp-clothing-theme' ),
-        'secondary' => __( 'Secondary / Top Bar Menu', 'wp-clothing-theme' ),
+        'primary'      => __( 'Primary Menu', 'wp-clothing-theme' ),
+        'footer'       => __( 'Footer Menu', 'wp-clothing-theme' ),
+        'secondary'    => __( 'Secondary / Top Bar Menu', 'wp-clothing-theme' ),
+        'footer-shop'  => __( 'Footer: Tienda', 'wp-clothing-theme' ),
+        'footer-info'  => __( 'Footer: Información', 'wp-clothing-theme' ),
+        'footer-legal' => __( 'Footer: Aviso legal (barra inferior)', 'wp-clothing-theme' ),
     ] );
 }
 
@@ -126,6 +129,14 @@ add_action( 'widgets_init', 'wpc_register_sidebars' );function wpc_register_side
         'before_title'  => '<h4 class="wpc-widget__title">',
         'after_title'   => '</h4>',
     ] );
+    register_sidebar( [
+        'name'          => __( 'Footer Columna 4 (Contacto)', 'wp-clothing-theme' ),
+        'id'            => 'footer-col-4',
+        'before_widget' => '<div class="wpc-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="wpc-footer__col-title">',
+        'after_title'   => '</h4>',
+    ] );
 }
 
 // -- Shortcodes ----------------------------------------------------------------
@@ -155,6 +166,82 @@ function wpc_customizer_register( WP_Customize_Manager $wp_customize ): void {
         'section' => 'wpc_header_section',
         'type'    => 'text',
     ] );
+}
+
+// -- Customizer: footer settings ----------------------------------------------
+add_action( 'customize_register', 'wpc_footer_customizer_register' );
+function wpc_footer_customizer_register( WP_Customize_Manager $wp_customize ): void {
+    $wp_customize->add_section( 'wpc_footer_section', [
+        'title'    => __( 'Footer', 'wp-clothing-theme' ),
+        'priority' => 35,
+    ] );
+
+    // Description
+    $wp_customize->add_setting( 'wpc_footer_desc', [
+        'default'           => __( 'Tu tienda de moda favorita. Calidad y estilo en cada prenda.', 'wp-clothing-theme' ),
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'transport'         => 'postMessage',
+    ] );
+    $wp_customize->add_control( 'wpc_footer_desc', [
+        'label'   => __( 'Descripción del footer', 'wp-clothing-theme' ),
+        'section' => 'wpc_footer_section',
+        'type'    => 'textarea',
+    ] );
+
+    // Contact text & email
+    $wp_customize->add_setting( 'wpc_footer_contact_text', [
+        'default'           => __( 'Estamos aquí para ayudarte. Escríbenos en cualquier momento.', 'wp-clothing-theme' ),
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'transport'         => 'postMessage',
+    ] );
+    $wp_customize->add_control( 'wpc_footer_contact_text', [
+        'label'   => __( 'Texto de contacto', 'wp-clothing-theme' ),
+        'section' => 'wpc_footer_section',
+        'type'    => 'textarea',
+    ] );
+
+    $wp_customize->add_setting( 'wpc_footer_email', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_email',
+    ] );
+    $wp_customize->add_control( 'wpc_footer_email', [
+        'label'   => __( 'Email de contacto', 'wp-clothing-theme' ),
+        'section' => 'wpc_footer_section',
+        'type'    => 'email',
+    ] );
+
+    // Copyright
+    $wp_customize->add_setting( 'wpc_footer_copyright', [
+        'default'           => '&copy; ' . gmdate( 'Y' ) . ' ' . get_bloginfo( 'name' ) . '. Todos los derechos reservados.',
+        'sanitize_callback' => 'wp_kses_post',
+        'transport'         => 'postMessage',
+    ] );
+    $wp_customize->add_control( 'wpc_footer_copyright', [
+        'label'   => __( 'Texto de copyright', 'wp-clothing-theme' ),
+        'section' => 'wpc_footer_section',
+        'type'    => 'text',
+    ] );
+
+    // Social media links
+    $social_networks = [
+        'instagram' => __( 'Instagram URL', 'wp-clothing-theme' ),
+        'facebook'  => __( 'Facebook URL', 'wp-clothing-theme' ),
+        'tiktok'    => __( 'TikTok URL', 'wp-clothing-theme' ),
+        'pinterest' => __( 'Pinterest URL', 'wp-clothing-theme' ),
+        'twitter'   => __( 'Twitter / X URL', 'wp-clothing-theme' ),
+        'youtube'   => __( 'YouTube URL', 'wp-clothing-theme' ),
+    ];
+    foreach ( $social_networks as $key => $label ) {
+        $wp_customize->add_setting( 'wpc_footer_' . $key, [
+            'default'           => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ] );
+        $wp_customize->add_control( 'wpc_footer_' . $key, [
+            'label'   => $label,
+            'section' => 'wpc_footer_section',
+            'type'    => 'url',
+        ] );
+    }
 }
 
 // -- WooCommerce: update cart count via AJAX (fragment) -----------------------

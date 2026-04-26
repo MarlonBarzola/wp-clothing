@@ -164,6 +164,7 @@
     cursor: pointer;
     @include flex-center;
     transition: background $transition-fast, box-shadow $transition-fast, border-color $transition-fast;
+    padding: 0;
 
     svg {
         width: 16px;

@@ -1,5 +1,7 @@
 // ============================================================
 //  LAYOUT: FOOTER
+//  4-column ecommerce footer — minimalista, responsive
+//  Cols: Brand+Social | Tienda | Información | Contacto
 // ============================================================
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins'    as *;
@@ -7,8 +9,11 @@
 .wpc-footer {
     background: $color-dark;
     color: rgba($color-white, .8);
+    font-family: $font-body;
     font-size: $font-size-sm;
+    line-height: 1.7;
 
+    // ── Top grid ────────────────────────────────────────────
     &__top {
         @include container;
         display: grid;
@@ -17,81 +22,244 @@
         padding-top: $space-7;
         padding-bottom: $space-6;
 
-        @include max-respond-to(lg) { grid-template-columns: 1fr 1fr; }
-        @include max-respond-to(sm) { grid-template-columns: 1fr; }
+        @include max-respond-to(lg) {
+            grid-template-columns: 1fr 1fr;
+            gap: $space-4;
+        }
+
+        @include max-respond-to(sm) {
+            grid-template-columns: 1fr;
+            gap: $space-4;
+        }
     }
 
+    // ── Column base ─────────────────────────────────────────
+    &__col {
+        display: flex;
+        flex-direction: column;
+
+        // Brand col fills more space on ≤lg
+        &--brand {
+            @include max-respond-to(lg) { grid-column: 1 / -1; }
+            @include max-respond-to(sm) { grid-column: auto; }
+        }
+    }
+
+    // ── Logo ────────────────────────────────────────────────
     &__logo {
-        img { height: 40px; filter: brightness(0) invert(1); margin-bottom: $space-2; }
+        margin-bottom: $space-3;
+
+        img {
+            height: 38px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            display: block;
+        }
     }
 
+    &__site-name {
+        font-family: $font-heading;
+        font-size: $font-size-xl;
+        font-weight: 700;
+        color: $color-white;
+        text-decoration: none;
+        letter-spacing: .02em;
+    }
+
+    // ── About / description ─────────────────────────────────
     &__about {
         font-size: $font-size-sm;
-        line-height: 1.7;
-        opacity: .75;
+        line-height: 1.75;
+        color: rgba($color-white, .65);
         margin-bottom: $space-3;
+        max-width: 28ch;
     }
 
+    // ── Email link ──────────────────────────────────────────
+    &__email {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: $color-primary;
+        font-size: $font-size-sm;
+        text-decoration: none;
+        margin-top: $space-2;
+        transition: color $transition-fast;
+
+        &:hover { color: $color-primary-dark; }
+    }
+
+    // ── Social icons row ────────────────────────────────────
     &__social {
         display: flex;
-        gap: $space-2;
+        flex-wrap: wrap;
+        gap: $space-1;
+        margin-top: auto;
+        padding-top: $space-3;
+    }
+
+    &__social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid rgba($color-white, .25);
+        color: rgba($color-white, .75);
+        text-decoration: none;
+        transition:
+            background $transition-base,
+            border-color $transition-base,
+            color $transition-base,
+            transform $transition-fast;
+
+        svg { display: block; }
+
+        &:hover {
+            background: $color-primary;
+            border-color: $color-primary;
+            color: $color-white;
+            transform: translateY(-2px);
+        }
+    }
+
+    // ── Column title ────────────────────────────────────────
+    &__col-title {
+        font-family: $font-heading;
+        font-size: $font-size-md;
+        font-weight: 700;
+        color: $color-white;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        margin-bottom: $space-3;
+
+        // Decorative underline
+        &::after {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: $color-primary;
+            margin-top: 8px;
+        }
+    }
+
+    // ── Nav link lists ──────────────────────────────────────
+    &__links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        li { margin: 0; }
 
         a {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid rgba($color-white, .3);
-            @include flex-center;
-            color: $color-white;
+            color: rgba($color-white, .65);
+            text-decoration: none;
             font-size: $font-size-sm;
-            transition: background $transition-base, border-color $transition-base;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition:
+                color $transition-fast,
+                gap $transition-fast;
+
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 0;
+                height: 1px;
+                background: $color-primary;
+                transition: width $transition-fast;
+                vertical-align: middle;
+            }
 
             &:hover {
-                background: $color-primary;
-                border-color: $color-primary;
+                color: $color-white;
+                gap: 10px;
+
+                &::before { width: 12px; }
             }
         }
     }
 
-    &__col-title {
-        font-family: $font-heading;
-        font-size: $font-size-md;
-        color: $color-white;
-        font-weight: 700;
-        margin-bottom: $space-3;
-    }
-
-    &__links {
+    // ── Legal nav (bottom bar) ──────────────────────────────
+    &__legal-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
         display: flex;
-        flex-direction: column;
-        gap: $space-1;
+        flex-wrap: wrap;
+        gap: $space-1 $space-3;
 
         a {
-            opacity: .75;
-            transition: opacity $transition-fast, padding-left $transition-fast;
+            color: rgba($color-white, .45);
+            text-decoration: none;
+            font-size: $font-size-xs;
+            transition: color $transition-fast;
 
-            &:hover { opacity: 1; padding-left: 6px; }
+            &:hover { color: rgba($color-white, .8); }
         }
     }
 
+    // ── Bottom bar ──────────────────────────────────────────
     &__bottom {
         border-top: 1px solid rgba($color-white, .1);
-        padding: $space-3 $space-4;
 
         &__inner {
             @include container;
-            @include flex-between;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             flex-wrap: wrap;
             gap: $space-2;
-            font-size: $font-size-xs;
-            opacity: .6;
+            padding-top: $space-3;
+            padding-bottom: $space-3;
         }
     }
 
+    &__copyright {
+        font-size: $font-size-xs;
+        color: rgba($color-white, .45);
+    }
+
+    // ── Payment icons (optional) ────────────────────────────
     &__payments {
         display: flex;
         gap: $space-1;
         align-items: center;
-        img { height: 22px; opacity: .6; filter: grayscale(1); }
+
+        img {
+            height: 22px;
+            width: auto;
+            opacity: .5;
+            filter: grayscale(1);
+            transition: opacity $transition-fast;
+
+            &:hover { opacity: .8; }
+        }
+    }
+
+    // ── Widget overrides inside footer ──────────────────────
+    .wpc-widget {
+        &__title {
+            @extend .wpc-footer__col-title;
+        }
+
+        p, ul {
+            color: rgba($color-white, .65);
+            font-size: $font-size-sm;
+        }
+
+        a {
+            color: rgba($color-white, .65);
+            text-decoration: none;
+            transition: color $transition-fast;
+            &:hover { color: $color-white; }
+        }
     }
 }
+

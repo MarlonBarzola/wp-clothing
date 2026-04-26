@@ -724,7 +724,9 @@ strong {
 .wpc-footer {
   background: #2d2d2d;
   color: rgba(255, 255, 255, 0.8);
+  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.875rem;
+  line-height: 1.7;
 }
 .wpc-footer__top {
   width: 100%;
@@ -739,67 +741,166 @@ strong {
 @media (max-width: 1023px) {
   .wpc-footer__top {
     grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
 }
 @media (max-width: 639px) {
   .wpc-footer__top {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 }
+.wpc-footer__col {
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 1023px) {
+  .wpc-footer__col--brand {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 639px) {
+  .wpc-footer__col--brand {
+    grid-column: auto;
+  }
+}
+.wpc-footer__logo {
+  margin-bottom: 1.5rem;
+}
 .wpc-footer__logo img {
-  height: 40px;
+  height: 38px;
+  width: auto;
   filter: brightness(0) invert(1);
-  margin-bottom: 1rem;
+  display: block;
+}
+.wpc-footer__site-name {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.02em;
 }
 .wpc-footer__about {
   font-size: 0.875rem;
-  line-height: 1.7;
-  opacity: 0.75;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.65);
   margin-bottom: 1.5rem;
+  max-width: 28ch;
+}
+.wpc-footer__email {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #f4a5a5;
+  font-size: 0.875rem;
+  text-decoration: none;
+  margin-top: 1rem;
+  transition: color 150ms ease;
+}
+.wpc-footer__email:hover {
+  color: #d97a7a;
 }
 .wpc-footer__social {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
 }
-.wpc-footer__social a {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  display: flex;
+.wpc-footer__social-link {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  font-size: 0.875rem;
-  transition: background 250ms ease, border-color 250ms ease;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: background 250ms ease, border-color 250ms ease, color 250ms ease, transform 150ms ease;
 }
-.wpc-footer__social a:hover {
+.wpc-footer__social-link svg {
+  display: block;
+}
+.wpc-footer__social-link:hover {
   background: #f4a5a5;
   border-color: #f4a5a5;
+  color: #ffffff;
+  transform: translateY(-2px);
 }
-.wpc-footer__col-title {
+.wpc-footer__col-title, .wpc-footer .wpc-widget__title {
   font-family: "Playfair Display", Georgia, serif;
   font-size: 1rem;
-  color: #ffffff;
   font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin-bottom: 1.5rem;
 }
+.wpc-footer__col-title::after, .wpc-footer .wpc-widget__title::after {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: #f4a5a5;
+  margin-top: 8px;
+}
 .wpc-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 10px;
+}
+.wpc-footer__links li {
+  margin: 0;
 }
 .wpc-footer__links a {
-  opacity: 0.75;
-  transition: opacity 150ms ease, padding-left 150ms ease;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 150ms ease, gap 150ms ease;
+}
+.wpc-footer__links a::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 1px;
+  background: #f4a5a5;
+  transition: width 150ms ease;
+  vertical-align: middle;
 }
 .wpc-footer__links a:hover {
-  opacity: 1;
-  padding-left: 6px;
+  color: #ffffff;
+  gap: 10px;
+}
+.wpc-footer__links a:hover::before {
+  width: 12px;
+}
+.wpc-footer__legal-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+.wpc-footer__legal-links a {
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: color 150ms ease;
+}
+.wpc-footer__legal-links a:hover {
+  color: rgba(255, 255, 255, 0.8);
 }
 .wpc-footer__bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem 2rem;
 }
 .wpc-footer__bottom__inner {
   width: 100%;
@@ -810,8 +911,12 @@ strong {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.wpc-footer__copyright {
   font-size: 0.75rem;
-  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.45);
 }
 .wpc-footer__payments {
   display: flex;
@@ -820,8 +925,25 @@ strong {
 }
 .wpc-footer__payments img {
   height: 22px;
-  opacity: 0.6;
+  width: auto;
+  opacity: 0.5;
   filter: grayscale(1);
+  transition: opacity 150ms ease;
+}
+.wpc-footer__payments img:hover {
+  opacity: 0.8;
+}
+.wpc-footer .wpc-widget p, .wpc-footer .wpc-widget ul {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.875rem;
+}
+.wpc-footer .wpc-widget a {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.wpc-footer .wpc-widget a:hover {
+  color: #ffffff;
 }
 
 .btn {
@@ -1406,6 +1528,7 @@ strong {
   align-items: center;
   justify-content: center;
   transition: background 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+  padding: 0;
 }
 .wpc-tabs-nav svg {
   width: 16px;
