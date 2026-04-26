@@ -66,10 +66,12 @@ function wpc_render_product_tabs(array $atts = []): string
         <div class="wpc-product-tabs__header">
 
             <?php if ( $atts['title'] ) : ?>
-                <h2 class="wpc-product-tabs__title"><?php echo esc_html( $atts['title'] ); ?></h2>
+                <h2 class="wpc-product-tabs__title"
+                    data-scroll="fade-right"><?php echo esc_html( $atts['title'] ); ?></h2>
             <?php endif; ?>
 
             <nav class="wpc-product-tabs__nav" role="tablist"
+                 data-scroll="fade-up" data-scroll-delay="1"
                  aria-label="<?php esc_attr_e( 'Categorias de productos', 'wp-clothing-theme' ); ?>">
                 <?php foreach ( $tabs as $i => $tab ) :
                     $tab_id    = 'wpc-tab-'   . sanitize_html_class( $tab['slug'] );

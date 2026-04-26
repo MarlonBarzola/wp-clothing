@@ -260,5 +260,35 @@
         widget.querySelector('.wpc-product-tabs__tab')?.click();
     });
 
+    // ── Scroll-reveal (IntersectionObserver) ──────────────────
+    if ('IntersectionObserver' in window) {
+        // Auto-assign data-scroll a componentes sin atributo manual
+        const autoScroll = [
+            { sel: '.wpc-banner',     anim: 'zoom-in' },
+            { sel: '.wpc-newsletter', anim: 'fade-up' },
+        ];
+        autoScroll.forEach(({ sel, anim }) => {
+            document.querySelectorAll(sel).forEach(el => {
+                if (!el.hasAttribute('data-scroll')) {
+                    el.setAttribute('data-scroll', anim);
+                }
+            });
+        });
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px',
+        });
+
+        document.querySelectorAll('[data-scroll]').forEach(el => scrollObserver.observe(el));
+    }
+
 })();
 

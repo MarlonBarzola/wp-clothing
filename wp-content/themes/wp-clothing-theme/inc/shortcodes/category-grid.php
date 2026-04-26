@@ -46,7 +46,8 @@ function wpc_render_category_grid(array $atts = []): string
     ob_start();
 ?>
     <div class="wpc-category-grid">
-        <?php foreach ($categories as $cat) :
+        <?php $wpc_card_idx = 0; foreach ($categories as $cat) :
+            $wpc_card_idx++;
             $link      = esc_url(get_term_link($cat));
             $name      = esc_html($cat->name);
             $thumb_id  = get_term_meta($cat->term_id, 'thumbnail_id', true);
@@ -57,7 +58,11 @@ function wpc_render_category_grid(array $atts = []): string
                 ? esc_attr(get_post_meta($thumb_id, '_wp_attachment_image_alt', true) ?: $name)
                 : esc_attr($name);
         ?>
-            <a class="wpc-category-card" href="<?php echo $link; ?>" aria-label="<?php echo $name; ?>">
+            <a class="wpc-category-card"
+               data-scroll="fade-up"
+               data-scroll-delay="<?php echo $wpc_card_idx; ?>"
+               href="<?php echo $link; ?>"
+               aria-label="<?php echo $name; ?>">
                 <div class="wpc-category-card__image">
                     <img src="<?php echo esc_url($thumb_url); ?>"
                         alt="<?php echo $thumb_alt; ?>"
