@@ -192,28 +192,43 @@
     // ── Product tab swipers ───────────────────────────────────
     const tabSwipers = new Map();
 
-    document.querySelectorAll('.wpc-tabs-swiper').forEach(el => {
-        const panel  = el.closest('.wpc-product-tabs__panel');
-        const prevEl = panel.querySelector('.wpc-tabs-nav--prev');
-        const nextEl = panel.querySelector('.wpc-tabs-nav--next');
+    function initProductTabSwipers(root) {
+        root = root || document;
+        root.querySelectorAll('.wpc-tabs-swiper:not(.swiper-initialized)').forEach(el => {
+            const panel  = el.closest('.wpc-product-tabs__panel');
+            const prevEl = panel?.querySelector('.wpc-tabs-nav--prev');
+            const nextEl = panel?.querySelector('.wpc-tabs-nav--next');
 
-        const swiper = new Swiper(el, {
-            slidesPerView: 1,
-            spaceBetween: 16,
-            navigation: { prevEl, nextEl },
-            breakpoints: {
-                480:  { slidesPerView: 2 },
-                768:  { slidesPerView: 3 },
-                1024: { slidesPerView: 4 },
-            },
-            a11y: {
-                prevSlideMessage: 'Productos anteriores',
-                nextSlideMessage: 'Productos siguientes',
-            },
+            const swiper = new Swiper(el, {
+                slidesPerView: 1,
+                spaceBetween: 16,
+                navigation: { prevEl, nextEl },
+                breakpoints: {
+                    480:  { slidesPerView: 2 },
+                    768:  { slidesPerView: 3 },
+                    1024: { slidesPerView: 4 },
+                },
+                a11y: {
+                    prevSlideMessage: 'Productos anteriores',
+                    nextSlideMessage: 'Productos siguientes',
+                },
+            });
+
+            if (panel?.id) tabSwipers.set(panel.id, swiper);
         });
+    }
 
-        if (panel.id) tabSwipers.set(panel.id, swiper);
-    });
+    initProductTabSwipers();
+
+    // Re-inicializar dentro del editor de Elementor (el preview es un iframe
+    // donde Elementor re-renderiza widgets dinámicamente)
+    if (typeof window.elementorFrontend !== 'undefined') {
+        window.elementorFrontend.hooks.addAction('frontend/element_ready/global', function ($scope) {
+            if ($scope[0]?.querySelector('.wpc-tabs-swiper')) {
+                initProductTabSwipers($scope[0]);
+            }
+        });
+    }
 
     // ── Product tabs switching ────────────────────────────────
     document.querySelectorAll('.wpc-product-tabs__tab').forEach(tab => {

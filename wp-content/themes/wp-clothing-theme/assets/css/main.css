@@ -1513,6 +1513,17 @@ strong {
   position: relative;
 }
 
+.wpc-tabs-swiper:not(.swiper-initialized) {
+  overflow: hidden;
+}
+.wpc-tabs-swiper:not(.swiper-initialized) .swiper-wrapper {
+  flex-wrap: nowrap;
+}
+.wpc-tabs-swiper:not(.swiper-initialized) .swiper-wrapper .swiper-slide {
+  flex-shrink: 0;
+  width: 25%;
+}
+
 .wpc-tabs-nav {
   position: absolute;
   top: 50%;

@@ -149,6 +149,20 @@
     }
 }
 
+// ── Pre-init FOUC guard: limita slides antes de que Swiper cargue ──
+.wpc-tabs-swiper:not(.swiper-initialized) {
+    overflow: hidden;
+
+    .swiper-wrapper {
+        flex-wrap: nowrap;
+
+        .swiper-slide {
+            flex-shrink: 0;
+            width: 25%; // ~4 columnas; Swiper sobreescribe esto al inicializar
+        }
+    }
+}
+
 // ── Swiper nav buttons ───────────────────────────────────────
 .wpc-tabs-nav {
     position: absolute;
