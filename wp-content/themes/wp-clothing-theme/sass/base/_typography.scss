@@ -12,6 +12,17 @@ body {
     background-color: $color-white;
 }
 
+// ── Color global: todos los textos ───────────────────────────
+body,
+h1, h2, h3, h4, h5, h6,
+p, span, li, td, th, label, figcaption, blockquote, cite,
+a, a:visited, a:hover, a:focus,
+.elementor-widget-container,
+.elementor-heading-title,
+.elementor-widget-text-editor {
+    color: $color-dark;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: $font-heading;
     color: $color-dark;
@@ -19,12 +30,26 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
-h1 { font-size: clamp(2rem, 5vw, #{$font-size-4xl}); }
-h2 { font-size: clamp(1.5rem, 3.5vw, #{$font-size-3xl}); }
-h3 { font-size: clamp(1.25rem, 2.5vw, #{$font-size-2xl}); }
+// ── Heading sizes ────────────────────────────────────────────
+h1,
+.elementor-heading-title.elementor-size-xxl,
+.elementor-heading-title[class*="elementor-size-"] { font-size: 52px; }
+
+h2 { font-size: 36px; }
+h3 { font-size: 22px; }
 h4 { font-size: $font-size-xl; }
 h5 { font-size: $font-size-lg; }
 h6 { font-size: $font-size-md; }
+
+// ── Elementor heading widget: forzar fuente y tamaños ────────
+.elementor-widget-heading .elementor-heading-title {
+    font-family: $font-heading !important;
+    color: $color-dark !important;
+}
+
+.elementor-widget-heading h1.elementor-heading-title { font-size: 52px; }
+.elementor-widget-heading h2.elementor-heading-title { font-size: 36px; }
+.elementor-widget-heading h3.elementor-heading-title { font-size: 22px; }
 
 p {
     margin-bottom: 1rem;

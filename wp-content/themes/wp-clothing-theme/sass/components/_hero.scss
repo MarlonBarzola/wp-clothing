@@ -59,6 +59,16 @@
         display: flex;
         gap: $space-2;
         flex-wrap: wrap;
+        a {
+            color: $color-white;
+        }
+        a.btn--primary {
+            border: 0;
+            &:hover {
+                background-color: $color-dark;
+                color: $color-white;
+            }
+        }
     }
 
     &__subtitle {

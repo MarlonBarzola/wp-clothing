@@ -60,30 +60,42 @@ table {
 }
 
 body {
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: #555555;
+  color: #0A1E33;
   background-color: #ffffff;
 }
 
+body,
+h1, h2, h3, h4, h5, h6,
+p, span, li, td, th, label, figcaption, blockquote, cite,
+a, a:visited, a:hover, a:focus,
+.elementor-widget-container,
+.elementor-heading-title,
+.elementor-widget-text-editor {
+  color: #0A1E33;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", Georgia, serif;
-  color: #2d2d2d;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
+  color: #0A1E33;
   line-height: 1.2;
   font-weight: 700;
 }
 
-h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+h1,
+.elementor-heading-title.elementor-size-xxl,
+.elementor-heading-title[class*=elementor-size-] {
+  font-size: 52px;
 }
 
 h2 {
-  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-size: 36px;
 }
 
 h3 {
-  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  font-size: 22px;
 }
 
 h4 {
@@ -96,6 +108,23 @@ h5 {
 
 h6 {
   font-size: 1rem;
+}
+
+.elementor-widget-heading .elementor-heading-title {
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif !important;
+  color: #0A1E33 !important;
+}
+
+.elementor-widget-heading h1.elementor-heading-title {
+  font-size: 52px;
+}
+
+.elementor-widget-heading h2.elementor-heading-title {
+  font-size: 36px;
+}
+
+.elementor-widget-heading h3.elementor-heading-title {
+  font-size: 22px;
 }
 
 p {
@@ -118,15 +147,15 @@ strong {
   --clr-primary-dark: #d97a7a;
   --clr-secondary: #f9e4d4;
   --clr-accent: #c8e6c9;
-  --clr-dark: #2d2d2d;
-  --clr-text: #555555;
+  --clr-dark: #0A1E33;
+  --clr-text: #0A1E33;
   --clr-light: #fafafa;
   --clr-white: #ffffff;
   --clr-border: #e8e8e8;
   --clr-sale: #e74c3c;
   --clr-new: #27ae60;
-  --font-heading: Playfair Display, Georgia, serif;
-  --font-body: Nunito, Helvetica Neue, Arial, sans-serif;
+  --font-heading: Catamaran, Helvetica Neue, Arial, sans-serif;
+  --font-body: Catamaran, Helvetica Neue, Arial, sans-serif;
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
@@ -183,7 +212,7 @@ strong {
   background: #f9e4d4;
 }
 .section--bg-dark {
-  background: #2d2d2d;
+  background: #0A1E33;
   color: #ffffff;
 }
 .section--bg-dark h2, .section--bg-dark h3 {
@@ -191,7 +220,7 @@ strong {
 }
 
 .wpc-topbar {
-  background: #2d2d2d;
+  background: #0A1E33;
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.75rem;
   letter-spacing: 0.03em;
@@ -214,6 +243,7 @@ strong {
   opacity: 0.8;
   transition: opacity 150ms ease;
   white-space: nowrap;
+  color: #ffffff;
 }
 .wpc-topbar__links a:hover {
   color: #ffffff;
@@ -221,6 +251,7 @@ strong {
   text-decoration: underline;
 }
 .wpc-topbar__promo {
+  color: #ffffff;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -267,10 +298,10 @@ strong {
   display: block;
 }
 .wpc-header__logo-text {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2d2d2d;
+  color: #0A1E33;
   letter-spacing: -0.02em;
 }
 .wpc-header__actions {
@@ -302,7 +333,7 @@ strong {
 .wpc-header__burger span {
   display: block;
   height: 2px;
-  background: #2d2d2d;
+  background: #0A1E33;
   border-radius: 2px;
   transition: transform 250ms ease, opacity 250ms ease, width 250ms ease;
 }
@@ -324,7 +355,7 @@ strong {
   justify-content: center;
   width: 35px !important;
   height: 35px !important;
-  color: #2d2d2d !important;
+  color: #0A1E33 !important;
   transition: background 150ms ease, color 150ms ease !important;
   cursor: pointer;
   padding: 0 !important;
@@ -411,7 +442,7 @@ strong {
   border-radius: 4px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #2d2d2d;
+  color: #0A1E33;
   white-space: nowrap;
   transition: color 150ms ease, background 150ms ease;
 }
@@ -489,7 +520,7 @@ strong {
   position: fixed;
   inset: 0;
   z-index: 400;
-  background: rgba(45, 45, 45, 0.88);
+  background: rgba(10, 30, 51, 0.88);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -519,14 +550,14 @@ strong {
   border: none;
   outline: none;
   background: transparent;
-  color: #2d2d2d;
+  color: #0A1E33;
 }
 .wpc-search-overlay .search-field::placeholder {
-  color: #888888;
+  color: #1b5088;
 }
 .wpc-search-overlay .search-submit {
   padding: 1rem 1.5rem;
-  background: #2d2d2d;
+  background: #0A1E33;
   color: #ffffff;
   font-weight: 700;
   font-size: 0.875rem;
@@ -586,10 +617,10 @@ strong {
   border-bottom: 1px solid #e8e8e8;
 }
 .wpc-mobile-drawer__logo-text {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2d2d2d;
+  color: #0A1E33;
 }
 .wpc-mobile-drawer__close {
   width: 36px;
@@ -598,7 +629,7 @@ strong {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  color: #2d2d2d;
+  color: #0A1E33;
   cursor: pointer;
   transition: background 150ms ease;
 }
@@ -624,7 +655,7 @@ strong {
   border-radius: 4px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #2d2d2d;
+  color: #0A1E33;
   transition: background 150ms ease;
 }
 .wpc-mobile-drawer__footer a:hover {
@@ -647,7 +678,7 @@ strong {
   padding: 0.9rem 1.5rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #2d2d2d;
+  color: #0A1E33;
   display: block;
   transition: background 150ms ease;
 }
@@ -664,7 +695,7 @@ strong {
   width: 48px;
   height: 48px;
   flex-shrink: 0;
-  color: #555555;
+  color: #0A1E33;
   cursor: pointer;
   transition: transform 250ms ease;
   border-left: 1px solid #e8e8e8;
@@ -699,7 +730,7 @@ strong {
   padding-left: 3rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #555555;
+  color: #0A1E33;
 }
 
 .wpc-overlay-bg {
@@ -707,7 +738,7 @@ strong {
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: rgba(45, 45, 45, 0.5);
+  background: rgba(10, 30, 51, 0.5);
   cursor: pointer;
 }
 .wpc-overlay-bg.is-visible {
@@ -723,9 +754,9 @@ strong {
   }
 }
 .wpc-footer {
-  background: #2d2d2d;
+  background: #0A1E33;
   color: rgba(255, 255, 255, 0.8);
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.875rem;
   line-height: 1.7;
 }
@@ -775,10 +806,10 @@ strong {
   display: block;
 }
 .wpc-footer__site-name {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #ffffff !important;
   text-decoration: none;
   letter-spacing: 0.02em;
 }
@@ -822,16 +853,15 @@ strong {
   transition: background 250ms ease, border-color 250ms ease, color 250ms ease, transform 150ms ease;
 }
 .wpc-footer__social-link svg {
+  color: #ffffff;
   display: block;
 }
 .wpc-footer__social-link:hover {
-  background: #f4a5a5;
-  border-color: #f4a5a5;
   color: #ffffff;
   transform: translateY(-2px);
 }
 .wpc-footer__col-title, .wpc-footer .wpc-widget__title {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
   font-weight: 700;
   color: #ffffff;
@@ -954,7 +984,7 @@ strong {
   gap: 0.5rem;
   padding: 0.75rem 2rem;
   border-radius: 999px;
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -976,9 +1006,9 @@ strong {
 }
 
 .btn--primary {
-  background: #2d2d2d;
+  background: #0A1E33;
   color: #ffffff;
-  border-color: #2d2d2d;
+  border-color: #0A1E33;
 }
 .btn--primary:hover {
   background: #d97a7a;
@@ -992,12 +1022,12 @@ strong {
 }
 .btn--outline:hover {
   background: #ffffff;
-  color: #2d2d2d;
+  color: #0A1E33;
 }
 
 .btn--secondary {
   background: #f4a5a5;
-  color: #2d2d2d;
+  color: #0A1E33;
   border-color: #f4a5a5;
 }
 .btn--secondary:hover {
@@ -1010,7 +1040,7 @@ strong {
   padding: 0;
   border: none;
   background: transparent;
-  color: #2d2d2d;
+  color: #0A1E33;
   font-weight: 700;
   text-decoration: underline;
   border-radius: 0;
@@ -1031,6 +1061,51 @@ strong {
 .btn--lg {
   padding: 1rem 2.5rem;
   font-size: 1rem;
+}
+
+@keyframes vamtam-underline-move {
+  0% {
+    mask-position: -8px center;
+    -webkit-mask-position: -8px center;
+  }
+  100% {
+    mask-position: 1000px center;
+    -webkit-mask-position: 1000px center;
+  }
+}
+.btn-ondas a {
+  background: none !important;
+  color: #0A1E33 !important;
+  padding: 0 !important;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  display: inline-block;
+  position: relative;
+  border: none !important;
+  transition: color 150ms ease;
+}
+.btn-ondas a::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background-color: #A9C2C2;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19.3 6'%3E%3Cpath d='m-5.5 3.8c1.3 1 2.7 2.2 5.5 2.2s4.2-1.2 5.5-2.2c1.1-1 2.1-1.8 4.2-1.8s3 0.8 4.2 1.8c1.3 1 2.7 2.2 5.5 2.2s4.2-1.2 5.5-2.2l-1.4-0.9c-1.1 1-2.1 1.8-4.2 1.8s-3-0.8-4.2-1.8-2.7-2.2-5.4-2.2c-2.8 0-4.2 1.2-5.5 2.2-1.2 1-2.1 1.8-4.2 1.8s-3-0.8-4.2-1.8l-1.3 0.9z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19.3 6'%3E%3Cpath d='m-5.5 3.8c1.3 1 2.7 2.2 5.5 2.2s4.2-1.2 5.5-2.2c1.1-1 2.1-1.8 4.2-1.8s3 0.8 4.2 1.8c1.3 1 2.7 2.2 5.5 2.2s4.2-1.2 5.5-2.2l-1.4-0.9c-1.1 1-2.1 1.8-4.2 1.8s-3-0.8-4.2-1.8-2.7-2.2-5.4-2.2c-2.8 0-4.2 1.2-5.5 2.2-1.2 1-2.1 1.8-4.2 1.8s-3-0.8-4.2-1.8l-1.3 0.9z'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-size: 13px 6px;
+  mask-size: 13px 6px;
+  animation: vamtam-underline-move 40s linear infinite;
+  animation-play-state: paused;
+}
+.btn-ondas a:hover::before {
+  animation-play-state: running;
+  background-color: #D9886A;
 }
 
 .wpc-hero {
@@ -1056,7 +1131,7 @@ strong {
 .wpc-hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(45, 45, 45, 0.55) 0%, rgba(45, 45, 45, 0.1) 70%);
+  background: linear-gradient(to right, rgba(10, 30, 51, 0.55) 0%, rgba(10, 30, 51, 0.1) 70%);
 }
 .wpc-hero__content {
   width: 100%;
@@ -1068,7 +1143,7 @@ strong {
   max-width: 620px;
 }
 .wpc-hero__eyebrow {
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -1088,6 +1163,16 @@ strong {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+.wpc-hero__cta a {
+  color: #ffffff;
+}
+.wpc-hero__cta a.btn--primary {
+  border: 0;
+}
+.wpc-hero__cta a.btn--primary:hover {
+  background-color: #0A1E33;
+  color: #ffffff;
 }
 .wpc-hero__subtitle {
   font-size: 1.125rem;
@@ -1121,7 +1206,7 @@ strong {
   color: #ffffff;
   width: 44px;
   height: 44px;
-  background: rgba(45, 45, 45, 0.35);
+  background: rgba(10, 30, 51, 0.35);
   border-radius: 50%;
   transition: background 250ms ease;
 }
@@ -1132,7 +1217,7 @@ strong {
 }
 .wpc-hero .swiper-button-prev:hover,
 .wpc-hero .swiper-button-next:hover {
-  background: rgba(45, 45, 45, 0.65);
+  background: rgba(10, 30, 51, 0.65);
 }
 .wpc-hero .swiper-pagination-bullet {
   background: rgba(255, 255, 255, 0.6);
@@ -1178,7 +1263,7 @@ strong {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(45, 45, 45, 0.25);
+  background: rgba(10, 30, 51, 0.25);
   opacity: 0;
   transition: opacity 250ms ease;
 }
@@ -1207,7 +1292,7 @@ strong {
   right: 0;
   text-align: center;
   color: #ffffff;
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.125rem;
   font-weight: 700;
   z-index: 3;
@@ -1313,7 +1398,7 @@ strong {
   display: inline-block;
   padding: 0.55rem 1.25rem;
   background: #ffffff;
-  color: #2d2d2d;
+  color: #0A1E33;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -1334,7 +1419,7 @@ strong {
   line-height: 1.3;
 }
 .wpc-product-card__title a {
-  color: #2d2d2d;
+  color: #0A1E33;
   text-decoration: none;
 }
 .wpc-product-card__title a:hover {
@@ -1342,7 +1427,7 @@ strong {
 }
 .wpc-product-card__price {
   font-size: 0.875rem;
-  color: #555555;
+  color: #0A1E33;
 }
 .wpc-product-card__price del {
   opacity: 0.6;
@@ -1372,7 +1457,7 @@ strong {
   color: #ffffff;
 }
 .wpc-badge--new {
-  background: #2d2d2d;
+  background: #0A1E33;
   color: #ffffff;
 }
 
@@ -1403,10 +1488,10 @@ strong {
   }
 }
 .wpc-product-tabs__title {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2d2d2d;
+  color: #0A1E33;
   white-space: nowrap;
   margin: 0;
   flex-shrink: 0;
@@ -1435,10 +1520,10 @@ strong {
   background: none !important;
   border: none;
   padding: 0.35rem 0.85rem;
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #555555 !important;
+  color: #0A1E33 !important;
   cursor: pointer;
   letter-spacing: 0.02em;
   border-radius: 999px;
@@ -1457,13 +1542,13 @@ strong {
   transition: transform 250ms ease;
 }
 .wpc-product-tabs__tab:hover {
-  color: #2d2d2d;
+  color: #0A1E33;
 }
 .wpc-product-tabs__tab:hover::after {
   transform: translateX(-50%) scaleX(1);
 }
 .wpc-product-tabs__tab.is-active {
-  color: #2d2d2d;
+  color: #0A1E33;
   font-weight: 700;
 }
 .wpc-product-tabs__tab.is-active::after {
@@ -1475,10 +1560,10 @@ strong {
   gap: 0.3rem;
   white-space: nowrap;
   flex-shrink: 0;
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #555555;
+  color: #0A1E33;
   text-decoration: none;
   letter-spacing: 0.03em;
   transition: color 150ms ease;
@@ -1505,7 +1590,7 @@ strong {
 }
 .wpc-product-tabs__empty {
   text-align: center;
-  color: #555555;
+  color: #0A1E33;
   font-size: 0.875rem;
   padding-block: 2rem;
 }
@@ -1545,7 +1630,7 @@ strong {
 .wpc-tabs-nav svg {
   width: 16px;
   height: 16px;
-  color: #2d2d2d;
+  color: #0A1E33;
   transition: color 150ms ease;
 }
 .wpc-tabs-nav:hover {
@@ -1608,7 +1693,7 @@ strong {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(45, 45, 45, 0.65) 0%, transparent 60%);
+  background: linear-gradient(to top, rgba(10, 30, 51, 0.65) 0%, transparent 60%);
   z-index: 1;
 }
 .wpc-banner__content {
@@ -1625,7 +1710,7 @@ strong {
   opacity: 0.85;
 }
 .wpc-banner__title {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 2rem;
   color: #ffffff;
   margin-bottom: 1rem;
@@ -1656,7 +1741,7 @@ strong {
   text-align: center;
 }
 .wpc-newsletter__eyebrow {
-  font-family: "Nunito", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Catamaran", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -1669,7 +1754,7 @@ strong {
   margin-bottom: 0.5rem;
 }
 .wpc-newsletter__subtitle {
-  color: #555555;
+  color: #0A1E33;
   margin-bottom: 2rem;
 }
 .wpc-newsletter__form {
@@ -1687,17 +1772,17 @@ strong {
   border: none;
   background: #ffffff;
   font-size: 0.875rem;
-  color: #2d2d2d;
+  color: #0A1E33;
 }
 .wpc-newsletter__input::placeholder {
-  color: #888888;
+  color: #1b5088;
 }
 .wpc-newsletter__input:focus {
   outline: none;
 }
 .wpc-newsletter__submit {
   padding: 0.875rem 1.75rem;
-  background: #2d2d2d;
+  background: #0A1E33;
   color: #ffffff;
   font-size: 0.875rem;
   font-weight: 700;
@@ -1747,21 +1832,21 @@ strong {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 1rem;
-  color: #2d2d2d;
+  color: #0A1E33;
 }
 
 .widget_price_filter .price_slider_wrapper .ui-slider-range {
   background: #f4a5a5;
 }
 .widget_price_filter .price_slider_wrapper .ui-slider-handle {
-  background: #2d2d2d;
-  border-color: #2d2d2d;
+  background: #0A1E33;
+  border-color: #0A1E33;
 }
 
 .woocommerce-result-count,
 .woocommerce-ordering select {
   font-size: 0.875rem;
-  color: #555555;
+  color: #0A1E33;
 }
 
 .woocommerce-ordering select {
@@ -1795,17 +1880,17 @@ strong {
 }
 .woocommerce div.product div.summary .price {
   font-size: 1.5rem;
-  color: #2d2d2d;
+  color: #0A1E33;
 }
 .woocommerce div.product div.summary .price ins {
   text-decoration: none;
 }
 .woocommerce div.product div.summary .price del {
-  color: #959595;
+  color: #1f5d9e;
   margin-right: 0.5rem;
 }
 .woocommerce div.product div.summary .woocommerce-product-details__short-description {
-  color: #555555;
+  color: #0A1E33;
   margin-block: 1.5rem;
 }
 .woocommerce div.product .woocommerce-product-gallery .woocommerce-product-gallery__wrapper img {
@@ -1816,7 +1901,7 @@ strong {
 .woocommerce a.button,
 .woocommerce button.button,
 .woocommerce input.button {
-  background: #2d2d2d !important;
+  background: #0A1E33 !important;
   color: #ffffff !important;
   border-radius: 999px !important;
   font-weight: 700 !important;
@@ -1851,7 +1936,7 @@ strong {
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 0.06em;
-  color: #2d2d2d;
+  color: #0A1E33;
 }
 .woocommerce table.shop_table td, .woocommerce table.shop_table th {
   padding: 1rem 1.5rem;
@@ -1871,7 +1956,7 @@ strong {
 .woocommerce-checkout .form-row label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #2d2d2d;
+  color: #0A1E33;
   margin-bottom: 4px;
 }
 .woocommerce-checkout .form-row input.input-text,
@@ -2295,11 +2380,11 @@ strong {
 }
 
 .text-dark {
-  color: #2d2d2d !important;
+  color: #0A1E33 !important;
 }
 
 .text-muted {
-  color: #555555 !important;
+  color: #0A1E33 !important;
 }
 
 .text-white {
@@ -2331,7 +2416,7 @@ strong {
 }
 
 .bg-dark {
-  background-color: #2d2d2d !important;
+  background-color: #0A1E33 !important;
 }
 
 .bg-light {

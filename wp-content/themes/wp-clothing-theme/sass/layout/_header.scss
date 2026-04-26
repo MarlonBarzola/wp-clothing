@@ -32,6 +32,7 @@
             opacity: .8;
             transition: opacity $transition-fast;
             white-space: nowrap;
+            color: $color-white;
             &:hover { 
                 color: $color-white;
                 opacity: 1;
@@ -41,6 +42,7 @@
     }
 
     &__promo {
+        color: $color-white;
         text-align: center;
         white-space: nowrap;
         overflow: hidden;

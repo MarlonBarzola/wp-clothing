@@ -61,7 +61,7 @@
         font-family: $font-heading;
         font-size: $font-size-xl;
         font-weight: 700;
-        color: $color-white;
+        color: $color-white !important;
         text-decoration: none;
         letter-spacing: .02em;
     }
@@ -114,11 +114,12 @@
             color $transition-base,
             transform $transition-fast;
 
-        svg { display: block; }
+        svg {
+            color: $color-white;
+            display: block;
+        }
 
         &:hover {
-            background: $color-primary;
-            border-color: $color-primary;
             color: $color-white;
             transform: translateY(-2px);
         }

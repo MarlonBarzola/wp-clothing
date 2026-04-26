@@ -58,10 +58,10 @@ function wpc_enqueue_assets() {
         true
     );
 
-    // Google Fonts (Nunito + Playfair Display -- match demo aesthetic)
+    // Google Fonts (Catamaran — headings & body)
     wp_enqueue_style(
         'wpc-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Catamaran:wght@400;500;600;700;800&display=swap',
         [],
         null
     );
