@@ -1,60 +1,752 @@
 // ============================================================
-//  PAGES: SINGLE PRODUCT
+//  PAGES: SINGLE PRODUCT  —  PDP Layout & Components
+//
+//  Palette: Cream · Terracota · Navy  (catalog variables)
+//  Layout:  60/40 grid  →  Gallery left · Summary right
+//
+//  BEM blocks:
+//    .pdp-page         — page shell (background + container)
+//    .pdp-gallery      — vertical thumb strip + main image
+//    .pdp-summary      — right column typography hierarchy
+//    .pdp-actions      — qty stepper + scalloped CTA + wishlist
+//    .pdp-trust        — trust badges (shipping / returns)
+//    .pdp-qty          — quantity stepper widget
 // ============================================================
-@use '../abstracts/variables' as *;
-@use '../abstracts/mixins'    as *;
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
-.wpc-single-product {
+// ══════════════════════════════════════════════════════════════
+//  PAGE SHELL
+// ══════════════════════════════════════════════════════════════
+.pdp-page {
+    min-height: 60vh;
+
+    &__inner {
+        @include container;
+        padding-block: $space-6;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  WooCommerce div.product  — 60/40 two-column grid
+// ══════════════════════════════════════════════════════════════
+.woocommerce div.product,
+.woocommerce-page div.product {
     @include container;
-    padding-block: $space-6;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 57% 1fr;
     gap: $space-6;
+    align-items: start;
+    background: $color-white;
 
-    @include max-respond-to(md) { grid-template-columns: 1fr; }
-}
-
-// WooCommerce summary overrides
-.woocommerce div.product {
-    div.summary {
-        .product_title {
-            font-size: $font-size-2xl;
-            margin-bottom: $space-1;
-        }
-
-        .price {
-            font-size: $font-size-xl;
-            color: $color-dark;
-            ins { text-decoration: none; }
-            del { color: lighten($color-text, 25%); margin-right: .5rem; }
-        }
-
-        .woocommerce-product-details__short-description {
-            color: $color-text;
-            margin-block: $space-3;
-        }
-    }
-
-    // Gallery
-    .woocommerce-product-gallery {
-        .woocommerce-product-gallery__wrapper img {
-            border-radius: $radius-md;
-        }
+    @include max-respond-to(lg) {
+        grid-template-columns: 1fr;
     }
 }
 
-// Add to cart button
-.woocommerce #respond input#submit,
-.woocommerce a.button,
-.woocommerce button.button,
-.woocommerce input.button {
-    background: $color-dark !important;
-    color: $color-white !important;
-    border-radius: $radius-pill !important;
-    font-weight: 700 !important;
-    padding: .8rem 2rem !important;
-    letter-spacing: .05em !important;
-    transition: background $transition-base !important;
+// Reset WooCommerce floats that conflict with grid
+.woocommerce div.product div.images,
+.woocommerce div.product div.summary {
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+}
 
-    &:hover { background: $color-primary-dark !important; }
+// ══════════════════════════════════════════════════════════════
+//  GALLERY  — thumbnail strip (left) + main image (right)
+// ══════════════════════════════════════════════════════════════
+.pdp-gallery {
+    display: flex;
+    flex-direction: row;
+    gap: $space-2;
+    align-items: flex-start;
+
+    @include max-respond-to(sm) {
+        flex-direction: column-reverse;
+    }
+}
+
+// ── Vertical thumbnail strip ──────────────────────────────────
+.pdp-gallery__thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex-shrink: 0;
+    width: 72px;
+
+    @include max-respond-to(sm) {
+        flex-direction: row;
+        width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+.pdp-gallery__thumb {
+    width: 72px;
+    height: 90px;
+    flex-shrink: 0;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    background: $catalog-card-bg;
+    transition: border-color $transition-fast;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+        border-radius: 8px;
+    }
+
+    &:hover {
+        border-color: rgba($catalog-terracotta, 0.5);
+    }
+    &.is-active {
+        border-color: $catalog-terracotta;
+    }
+
+    &:focus-visible {
+        outline: 2px solid $catalog-terracotta;
+        outline-offset: 2px;
+    }
+}
+
+// ── Main image ────────────────────────────────────────────────
+.pdp-gallery__main {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+}
+
+.pdp-gallery__figure {
+    margin: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: $catalog-card-bg;
+}
+
+.pdp-gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: opacity 0.2s ease;
+}
+
+.pdp-gallery__zoom {
+    display: block;
+    height: 100%;
+}
+
+// Sale flash inside gallery
+.pdp-gallery .onsale {
+    position: absolute;
+    top: $space-2;
+    left: $space-2;
+    z-index: 4;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: $catalog-navy;
+    color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SUMMARY  — right column
+// ══════════════════════════════════════════════════════════════
+.woocommerce div.product div.summary {
+    padding-top: $space-2; // align visually with gallery top
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+}
+
+// ── Category eyebrow ─────────────────────────────────────────
+.woocommerce div.product .posted_in,
+.woocommerce div.product .product-category-eyebrow {
+    font-size: $font-size-xs;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $catalog-terracotta;
+    margin: 0;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// ── Product title ─────────────────────────────────────────────
+.woocommerce div.product .product_title {
+    font-family: $font-catalog-heading;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 400;
+    color: $catalog-navy;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+// ── Rating ───────────────────────────────────────────────────
+.woocommerce div.product .woocommerce-product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+
+    .star-rating {
+        color: $catalog-navy; // black stars
+        font-size: 0.9rem;
+
+        // WooCommerce star font uses ::before
+        &::before {
+            color: $catalog-navy;
+        }
+        span::before {
+            color: $catalog-navy;
+        }
+    }
+
+    .woocommerce-review-link {
+        font-size: $font-size-xs;
+        color: rgba($catalog-navy, 0.45);
+        text-decoration: underline;
+        &:hover {
+            color: $catalog-terracotta;
+        }
+    }
+}
+
+// ── Price ─────────────────────────────────────────────────────
+.woocommerce div.product p.price,
+.woocommerce div.product span.price {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $catalog-navy;
+    margin: 0;
+
+    del {
+        opacity: 0.4;
+        font-weight: 400;
+        font-size: $font-size-md;
+        margin-right: 0.4rem;
+    }
+
+    ins {
+        text-decoration: none;
+        color: $catalog-terracotta;
+    }
+}
+
+// ── Meta: SKU ─────────────────────────────────────────────────
+.woocommerce div.product .product_meta {
+    font-size: $font-size-xs;
+    color: rgba($catalog-navy, 0.4);
+
+    .sku_wrapper,
+    .posted_in,
+    .tagged_as {
+        display: block;
+        color: rgba($catalog-navy, 0.4);
+        margin-bottom: 0.2rem;
+    }
+
+    .sku {
+        font-weight: 600;
+    }
+
+    a {
+        color: rgba($catalog-navy, 0.55);
+        &:hover {
+            color: $catalog-terracotta;
+        }
+    }
+}
+
+// ── Short description ─────────────────────────────────────────
+.woocommerce div.product .woocommerce-product-details__short-description {
+    font-size: $font-size-sm;
+    color: rgba($catalog-navy, 0.65);
+    line-height: 1.7;
+    margin: 0;
+
+    p {
+        margin: 0;
+    }
+}
+
+// ── Divider between sections ──────────────────────────────────
+.woocommerce div.product .summary > *:not(:last-child) {
+    padding-bottom: $space-3;
+    border-bottom: 1px solid $catalog-divider;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  QUANTITY STEPPER  (.pdp-qty)
+// ══════════════════════════════════════════════════════════════
+.pdp-qty {
+    display: inline-flex;
+    align-items: center;
+    border: 1.5px solid $catalog-divider;
+    border-radius: $radius-sm;
+    overflow: hidden;
+    background: $color-white;
+    height: 48px;
+}
+
+.pdp-qty__btn {
+    width: 42px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: $catalog-navy;
+    transition:
+        background $transition-fast,
+        color $transition-fast;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &:hover {
+        background: rgba($catalog-navy, 0.05);
+        color: $catalog-terracotta;
+    }
+
+    &:focus-visible {
+        outline: 2px solid $catalog-terracotta;
+        outline-offset: -2px;
+    }
+}
+
+.pdp-qty__input {
+    width: 48px;
+    height: 100%;
+    border: none;
+    border-left: 1.5px solid $catalog-divider;
+    border-right: 1.5px solid $catalog-divider;
+    text-align: center;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $catalog-navy;
+    background: transparent;
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  ACTIONS ROW  (qty + CTA + wishlist)
+// ══════════════════════════════════════════════════════════════
+.pdp-actions {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+}
+
+// ── CTA button — scalloped ALL-AROUND contour ─────────────────
+//
+//  The festoneado effect on all four sides is built with two
+//  layered mask-images:
+//    1. Horizontal scallops on top and bottom (radial rows)
+//    2. Vertical scallops on left and right sides
+//
+//  Both use the same radial-gradient arch technique:
+//    - Top/bottom:  mask-size covers full width, repeat-x
+//    - Left/right:  mask-size covers full height, repeat-y
+//    - Both combined with mask-composite: intersect
+//
+.pdp-actions__cta {
+    // ── Reset WooCommerce button defaults ─────────────────────
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    // ── Layout ────────────────────────────────────────────────
+    flex: 1;
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    // ── Sizing: extra padding absorbs the scallop inset ───────
+    padding: 1rem 2.2rem;
+
+    // ── Flat terracotta plane ──────────────────────────────────
+    background: $catalog-terracotta;
+    color: $color-white;
+    border: none;
+
+    // ── Typography ────────────────────────────────────────────
+    font-size: $font-size-sm;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    // ── Transition ────────────────────────────────────────────
+    transition:
+        background $transition-base,
+        transform $transition-fast;
+
+    // ══════════════════════════════════════════════════════════
+    //  CSS MASK — scalloped contour on ALL FOUR sides
+    //
+    //  --sr  : scallop radius (arch depth)
+    //  --sw  : scallop period (arch width)  — horizontal
+    //  --sh  : scallop period (arch height) — vertical
+    // ══════════════════════════════════════════════════════════
+    --sr: 8px;
+    --sw: 16px;
+    --sh: 16px;
+
+    // Top + Bottom: arches cut from top/bottom edges
+    // Left + Right: arches cut from left/right edges
+    // Combined with mask-composite so only the intersection is visible
+    // (i.e., pixels inside ALL four scalloped borders)
+
+    -webkit-mask-image:
+        // Horizontal bands (top & bottom scallops)
+        radial-gradient(
+            circle at 50% calc(-1 * var(--sr)),
+            transparent var(--sr),
+            #000 calc(var(--sr) + 1px)
+        ),
+        radial-gradient(
+            circle at 50% calc(100% + var(--sr)),
+            transparent var(--sr),
+            #000 calc(var(--sr) + 1px)
+        ),
+        // Vertical bands (left & right scallops)
+        radial-gradient(
+                circle at calc(-1 * var(--sr)) 50%,
+                transparent var(--sr),
+                #000 calc(var(--sr) + 1px)
+            ),
+        radial-gradient(
+            circle at calc(100% + var(--sr)) 50%,
+            transparent var(--sr),
+            #000 calc(var(--sr) + 1px)
+        );
+
+    -webkit-mask-size:
+        var(--sw) 100%,
+        var(--sw) 100%,
+        100% var(--sh),
+        100% var(--sh);
+
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+
+    -webkit-mask-position:
+        top center,
+        bottom center,
+        left center,
+        right center;
+
+    -webkit-mask-composite: source-in, source-in, source-in;
+
+    mask-image:
+        radial-gradient(
+            circle at 50% calc(-1 * var(--sr)),
+            transparent var(--sr),
+            #000 calc(var(--sr) + 1px)
+        ),
+        radial-gradient(
+            circle at 50% calc(100% + var(--sr)),
+            transparent var(--sr),
+            #000 calc(var(--sr) + 1px)
+        ),
+        radial-gradient(
+            circle at calc(-1 * var(--sr)) 50%,
+            transparent var(--sr),
+            #000 calc(var(--sr) + 1px)
+        ),
+        radial-gradient(
+            circle at calc(100% + var(--sr)) 50%,
+            transparent var(--sr),
+            #000 calc(var(--sr) + 1px)
+        );
+
+    mask-size:
+        var(--sw) 100%,
+        var(--sw) 100%,
+        100% var(--sh),
+        100% var(--sh);
+
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+
+    mask-position:
+        top center,
+        bottom center,
+        left center,
+        right center;
+
+    mask-composite: intersect;
+
+    // ── Interactions ──────────────────────────────────────────
+    &:hover {
+        background: darken($catalog-terracotta, 8%);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    &:focus-visible {
+        outline: 3px solid $catalog-terracotta;
+        outline-offset: 4px;
+        border-radius: 2px;
+    }
+}
+
+// ── Wishlist button ───────────────────────────────────────────
+.pdp-actions__wishlist {
+    flex-shrink: 0;
+}
+
+.pdp-wishlist-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 1.5px solid $catalog-divider;
+    border-radius: 50%;
+    cursor: pointer;
+    color: rgba($catalog-navy, 0.4);
+    transition:
+        color $transition-fast,
+        border-color $transition-fast,
+        background $transition-fast;
+
+    &:hover {
+        color: $catalog-terracotta;
+        border-color: $catalog-terracotta;
+        background: rgba($catalog-terracotta, 0.07);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $catalog-terracotta;
+        outline-offset: 2px;
+    }
+}
+
+// ── YITH wishlist button reset ────────────────────────────────
+.pdp-actions__wishlist .yith-wcwl-add-to-wishlist {
+    .add_to_wishlist,
+    .yith-wcwl-wishlistaddedbrowse a,
+    .yith-wcwl-wishlistexistsbrowse a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border: 1.5px solid $catalog-divider;
+        border-radius: 50%;
+        color: rgba($catalog-navy, 0.4);
+        font-size: 0; // hide text label
+        transition:
+            color $transition-fast,
+            border-color $transition-fast;
+
+        &::before {
+            // Use the heart icon via inline SVG background
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231B2B4B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/%3E%3C/svg%3E")
+                center/contain no-repeat;
+        }
+
+        &:hover {
+            color: $catalog-terracotta;
+            border-color: $catalog-terracotta;
+        }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  TRUST BADGES
+// ══════════════════════════════════════════════════════════════
+.pdp-trust {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    padding-top: $space-3;
+    border-top: 1px solid $catalog-divider;
+}
+
+.pdp-trust__item {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-2;
+}
+
+.pdp-trust__icon {
+    flex-shrink: 0;
+    color: rgba($catalog-navy, 0.35);
+    margin-top: 1px;
+
+    svg {
+        display: block;
+    }
+}
+
+.pdp-trust__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+
+    strong {
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: $catalog-navy;
+    }
+
+    span {
+        font-size: $font-size-xs;
+        color: rgba($catalog-navy, 0.45);
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  WooCommerce: reset leftover single-product styles that
+//  conflict with the new layout
+// ══════════════════════════════════════════════════════════════
+
+// Remove default WC border + padding on gallery
+.woocommerce div.product .woocommerce-product-gallery {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+// Stock status
+.woocommerce div.product .stock {
+    font-size: $font-size-xs;
+    font-weight: 600;
+
+    &.in-stock {
+        color: #27ae60;
+    }
+    &.out-of-stock {
+        color: rgba($catalog-navy, 0.4);
+    }
+}
+
+// Cart form spacing
+.pdp-cart-form {
+    margin: 0;
+}
+
+// Override any WC default button that might bleed in from woocommerce.css
+.woocommerce div.product .single_add_to_cart_button.button.alt {
+    // All styling is on .pdp-actions__cta — suppress the WC defaults
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  PRODUCT TABS  (description, reviews, attributes)
+// ══════════════════════════════════════════════════════════════
+.woocommerce div.product .woocommerce-tabs {
+    @include container;
+    margin-top: $space-7;
+    grid-column: 1 / -1; // span full grid width
+
+    ul.tabs {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        padding: 0;
+        margin: 0 0 $space-4;
+        list-style: none;
+        &::after,
+        &::before {
+            display: none !important;
+        }
+        li {
+            margin: 0;
+            border: none;
+            background: none;
+
+            a {
+                font-size: $font-size-sm;
+                font-weight: 600;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: rgba($catalog-navy, 0.4);
+                padding: $space-2 $space-3;
+                display: block;
+                text-decoration: none;
+                border-bottom: 2px solid transparent;
+                transition:
+                    color $transition-fast,
+                    border-color $transition-fast;
+
+                &:hover {
+                    color: $catalog-navy;
+                }
+            }
+
+            &.active a {
+                color: $catalog-navy;
+                border-bottom-color: $catalog-terracotta;
+            }
+
+            &::after,
+            &::before {
+                display: none !important;
+            }
+        }
+    }
+
+    .woocommerce-Tabs-panel {
+        font-size: $font-size-sm;
+        color: rgba($catalog-navy, 0.7);
+        line-height: 1.8;
+        max-width: 680px;
+    }
 }

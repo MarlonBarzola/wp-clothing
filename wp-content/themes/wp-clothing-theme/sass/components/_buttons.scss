@@ -133,3 +133,7 @@ $_wave-duration:    40s;
         }
     }
 }
+
+.wc-block-components-button:not(.is-link) {
+    color: $color-white;
+}

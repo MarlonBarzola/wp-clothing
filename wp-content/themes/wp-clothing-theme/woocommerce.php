@@ -1,17 +1,41 @@
 <?php
 /**
- * WooCommerce Archive / Shop — Master layout template
+ * WooCommerce master template router
  *
- * Overrides WooCommerce's default archive-product.php behaviour.
- * Provides the 2-column catalog layout:
- *   · Left  25% — .catalog-sidebar  (Shop Sidebar widget area)
- *   · Right 75% — .catalog-grid     (WooCommerce product loop)
+ * woocommerce.php sits at the theme root and WordPress routes ALL
+ * WooCommerce requests through it — archives AND single products.
+ * This file inspects the current request and delegates to the right
+ * include so each page type gets its own layout.
+ *
+ * Route map:
+ *   is_singular('product')  → woocommerce/single-product-layout.php
+ *   everything else         → catalog 2-column layout (inline below)
  *
  * @package WP_Clothing_Theme
  */
 
 defined( 'ABSPATH' ) || exit;
 
+// ── Route: single product ─────────────────────────────────────────────────────
+if ( is_singular( 'product' ) ) {
+    get_header();
+    ?>
+    <div class="pdp-page">
+        <div class="pdp-page__inner">
+            <?php
+            while ( have_posts() ) {
+                the_post();
+                wc_get_template_part( 'content', 'single-product' );
+            }
+            ?>
+        </div>
+    </div>
+    <?php
+    get_footer();
+    return; // stop — do not fall through to the catalog layout
+}
+
+// ── Route: shop / category / tag / search archives ────────────────────────────
 get_header();
 ?>
 
