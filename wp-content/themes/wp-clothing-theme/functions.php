@@ -244,6 +244,11 @@ function wpc_footer_customizer_register( WP_Customize_Manager $wp_customize ): v
     }
 }
 
+// -- WooCommerce: remove duplicate sale flash on single product page -----------
+// The badge is already rendered manually inside product-image.php (inside the gallery).
+// WooCommerce also hooks it to woocommerce_before_single_product_summary by default → duplicate.
+remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
+
 // -- YITH Wishlist: remove auto-injected button on single product page --------
 // The button is already placed manually in woocommerce/single-product/add-to-cart/simple.php
 // Removing the automatic hook prevents it from rendering twice.

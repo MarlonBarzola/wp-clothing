@@ -126,14 +126,22 @@
     &--new  { background: $color-dark; color: $color-white; }
 }
 
-// WooCommerce sale badge
+// WooCommerce sale badge — catalog loop + single product
 .woocommerce span.onsale {
-    background: $color-sale;
+    position: absolute;
+    top: $space-2;
+    left: $space-2;
+    z-index: 10;
+    background: $catalog-terracotta;
+    color: $color-white;
     border-radius: $radius-pill;
     font-size: $font-size-xs;
     font-weight: 700;
-    min-height: auto;
-    min-width: auto;
-    padding: 3px 10px;
-    line-height: 1.6;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    min-height: 70px;
+    min-width: 70px;
+    padding: .25rem .65rem;
+    line-height: 1.5;
+    text-shadow: none;
 }
